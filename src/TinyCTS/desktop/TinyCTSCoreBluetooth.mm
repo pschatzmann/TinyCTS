@@ -1,4 +1,4 @@
-// Central and Peripheral for macOS: CoreBluetooth.
+// TinyCTSCentral and TinyCTSPeripheral for macOS: CoreBluetooth.
 //
 // Compile with ARC (-fobjc-arc) and link the frameworks CoreBluetooth and
 // Foundation: the CMake target TinyCTS does that. UNTESTED: this file could not
@@ -25,7 +25,6 @@
 #include "../TinyCTSTypes.h"
 
 using namespace tiny_cts;
-using namespace tiny_cts::desktop;
 
 static CBUUID* ctsUuid(uint16_t uuid16) {
   return [CBUUID UUIDWithString:[NSString stringWithFormat:@"%04X", uuid16]];
@@ -64,7 +63,7 @@ static std::string stateError(CBManagerState state) {
   }
 }
 
-// ---- Central ----------------------------------------------------------------
+// ---- TinyCTSCentral ----------------------------------------------------------------
 @interface TCCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 @property(strong) dispatch_queue_t queue;
 @property(strong) CBCentralManager* manager;
@@ -166,7 +165,7 @@ static std::string stateError(CBManagerState state) {
 }
 @end
 
-class CoreBluetoothCentral : public Central {
+class CoreBluetoothCentral : public TinyCTSCentral {
  public:
   CoreBluetoothCentral() { _c = [TCCentral new]; }
   ~CoreBluetoothCentral() override { disconnect(); }
@@ -317,11 +316,11 @@ class CoreBluetoothCentral : public Central {
   TCCentral* _c;
 };
 
-// ---- Peripheral -------------------------------------------------------------
+// ---- TinyCTSPeripheral -------------------------------------------------------------
 @interface TCPeripheral : NSObject <CBPeripheralManagerDelegate>
 {
  @public
-  PeripheralHandler* handler;
+  TinyCTSPeripheralHandler* handler;
 }
 @property(strong) dispatch_queue_t queue;
 @property(strong) CBPeripheralManager* manager;
@@ -402,13 +401,13 @@ class CoreBluetoothCentral : public Central {
 }
 @end
 
-class CoreBluetoothPeripheral : public Peripheral {
+class CoreBluetoothPeripheral : public TinyCTSPeripheral {
  public:
   CoreBluetoothPeripheral() { _p = [TCPeripheral new]; }
   ~CoreBluetoothPeripheral() override { stop(); }
 
   bool start(const std::string& name, bool settable, bool encrypted,
-             PeripheralHandler* handler, std::string& error) override {
+             TinyCTSPeripheralHandler* handler, std::string& error) override {
     waitFor(5000, [&] { return _p.state != CBManagerStateUnknown; });
     if (_p.state != CBManagerStatePoweredOn) {
       error = stateError(_p.state);
@@ -483,17 +482,15 @@ class CoreBluetoothPeripheral : public Peripheral {
 };
 
 namespace tiny_cts {
-namespace desktop {
 
-std::unique_ptr<Central> createCentral(const std::string&) {
-  return std::unique_ptr<Central>(new CoreBluetoothCentral());
+std::unique_ptr<TinyCTSCentral> ctsCreateCentral(const std::string&) {
+  return std::unique_ptr<TinyCTSCentral>(new CoreBluetoothCentral());
 }
 
-std::unique_ptr<Peripheral> createPeripheral(const std::string&) {
-  return std::unique_ptr<Peripheral>(new CoreBluetoothPeripheral());
+std::unique_ptr<TinyCTSPeripheral> ctsCreatePeripheral(const std::string&) {
+  return std::unique_ptr<TinyCTSPeripheral>(new CoreBluetoothPeripheral());
 }
 
-}  // namespace desktop
 }  // namespace tiny_cts
 
 #endif  // __APPLE__ && !ARDUINO

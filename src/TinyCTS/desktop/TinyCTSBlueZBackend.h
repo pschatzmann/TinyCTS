@@ -1,6 +1,6 @@
 /**
  * @file TinyCTSBlueZBackend.h
- * @brief Central and Peripheral for Linux: BlueZ over D-Bus (GIO).
+ * @brief TinyCTSCentral and TinyCTSPeripheral for Linux: BlueZ over D-Bus (GIO).
  */
 
 #pragma once
@@ -10,20 +10,18 @@
 #include "TinyCTSDesktop.h"
 
 namespace tiny_cts {
-namespace desktop {
-namespace {
 
-class BlueZCentral : public Central {
+class TinyCTSBlueZCentral : public TinyCTSCentral {
  public:
-  explicit BlueZCentral(const std::string& adapter) : _adapterName(adapter) {}
-  ~BlueZCentral() override { disconnect(); }
+  explicit TinyCTSBlueZCentral(const std::string& adapter) : _adapterName(adapter) {}
+  ~TinyCTSBlueZCentral() override { disconnect(); }
 
   bool scan(uint32_t timeoutMs, std::vector<TinyCTSScanEntry>& result,
             std::string& error) override {
     if (!open(error)) return false;
-    std::vector<bluez::Device> devices = bluez::discover(
-        _adapter, timeoutMs, [](const std::vector<bluez::Device>&) { return false; }, error);
-    for (const bluez::Device& d : devices) {
+    std::vector<TinyCTSBlueZ::Device> devices = TinyCTSBlueZ::discover(
+        _adapter, timeoutMs, [](const std::vector<TinyCTSBlueZ::Device>&) { return false; }, error);
+    for (const TinyCTSBlueZ::Device& d : devices) {
       if (d.seen) result.push_back(entry(d));
     }
     return true;
@@ -33,10 +31,10 @@ class BlueZCentral : public Central {
                std::string& error) override {
     disconnect();
     if (!open(error)) return false;
-    std::vector<bluez::Device> devices = bluez::discover(
+    std::vector<TinyCTSBlueZ::Device> devices = TinyCTSBlueZ::discover(
         _adapter, timeoutMs,
-        [&](const std::vector<bluez::Device>& l) { return pick(l, wanted) != nullptr; }, error);
-    const bluez::Device* d = pick(devices, wanted);
+        [&](const std::vector<TinyCTSBlueZ::Device>& l) { return pick(l, wanted) != nullptr; }, error);
+    const TinyCTSBlueZ::Device* d = pick(devices, wanted);
     if (d == nullptr) {
       error = wanted.empty() ? "no device with the Current Time Service found"
                              : "device " + wanted + " not found";
@@ -44,14 +42,14 @@ class BlueZCentral : public Central {
     }
     _device = *d;
     if (!_device.connected &&
-        bluez::call(_device.path, "org.bluez.Device1", "Connect", nullptr, error, 30000) ==
+        TinyCTSBlueZ::call(_device.path, "org.bluez.Device1", "Connect", nullptr, error, 30000) ==
             nullptr) {
       error = "cannot connect to " + _device.address + ": " + error;
-      _device = bluez::Device();
+      _device = TinyCTSBlueZ::Device();
       return false;
     }
     for (int i = 0; i < 100; i++) {  // up to 10 s
-      for (const bluez::Device& l : bluez::listDevices(_adapter)) {
+      for (const TinyCTSBlueZ::Device& l : TinyCTSBlueZ::listDevices(_adapter)) {
         if (l.path == _device.path && l.resolved) {
           found = entry(_device);
           return true;
@@ -65,38 +63,38 @@ class BlueZCentral : public Central {
   }
 
   bool read(uint16_t uuid, std::vector<uint8_t>& value, std::string& error) override {
-    std::string path = bluez::findCharacteristic(_device.path, uuid);
+    std::string path = TinyCTSBlueZ::findCharacteristic(_device.path, uuid);
     if (path.empty()) {
       error = "the device does not have the characteristic";
       return false;
     }
-    return bluez::readValue(path, value, error);
+    return TinyCTSBlueZ::readValue(path, value, error);
   }
 
   bool write(uint16_t uuid, const uint8_t* data, size_t len, std::string& error) override {
-    std::string path = bluez::findCharacteristic(_device.path, uuid);
+    std::string path = TinyCTSBlueZ::findCharacteristic(_device.path, uuid);
     if (path.empty()) {
       error = "the device does not have the characteristic";
       return false;
     }
-    return bluez::writeValue(path, data, len, error);
+    return TinyCTSBlueZ::writeValue(path, data, len, error);
   }
 
   void disconnect() override {
     if (_device.path.empty()) return;
     std::string ignored;
-    bluez::call(_device.path, "org.bluez.Device1", "Disconnect", nullptr, ignored);
-    _device = bluez::Device();
+    TinyCTSBlueZ::call(_device.path, "org.bluez.Device1", "Disconnect", nullptr, ignored);
+    _device = TinyCTSBlueZ::Device();
   }
 
  private:
   bool open(std::string& error) {
     error.clear();
-    _adapter = bluez::findAdapter(_adapterName, error);
+    _adapter = TinyCTSBlueZ::findAdapter(_adapterName, error);
     return !_adapter.empty();
   }
 
-  static TinyCTSScanEntry entry(const bluez::Device& d) {
+  static TinyCTSScanEntry entry(const TinyCTSBlueZ::Device& d) {
     TinyCTSScanEntry e;
     e.address = d.address;
     e.name = d.name;
@@ -105,12 +103,12 @@ class BlueZCentral : public Central {
     return e;
   }
 
-  static const bluez::Device* pick(const std::vector<bluez::Device>& devices,
+  static const TinyCTSBlueZ::Device* pick(const std::vector<TinyCTSBlueZ::Device>& devices,
                                    const std::string& wanted) {
-    for (const bluez::Device& d : devices) {
+    for (const TinyCTSBlueZ::Device& d : devices) {
       if (wanted.empty()) {
         if (d.cts && d.seen) return &d;
-      } else if (bluez::equalsIgnoreCase(d.address, wanted) || d.name == wanted) {
+      } else if (TinyCTSBlueZ::equalsIgnoreCase(d.address, wanted) || d.name == wanted) {
         if (d.seen || d.connected) return &d;
       }
     }
@@ -118,23 +116,23 @@ class BlueZCentral : public Central {
   }
 
   std::string _adapterName, _adapter;
-  bluez::Device _device;
+  TinyCTSBlueZ::Device _device;
 };
 
-class BlueZPeripheral : public Peripheral {
+class TinyCTSBlueZPeripheral : public TinyCTSPeripheral {
  public:
-  explicit BlueZPeripheral(const std::string& adapter) : _adapterName(adapter) {}
-  ~BlueZPeripheral() override { stop(); }
+  explicit TinyCTSBlueZPeripheral(const std::string& adapter) : _adapterName(adapter) {}
+  ~TinyCTSBlueZPeripheral() override { stop(); }
 
   bool start(const std::string& name, bool settable, bool encrypted,
-             PeripheralHandler* handler, std::string& error) override {
+             TinyCTSPeripheralHandler* handler, std::string& error) override {
     _handler = handler;
     _name = name;
     _settable = settable;
     _encrypted = encrypted;
     _error.clear();
-    _adapter = bluez::findAdapter(_adapterName, _error);
-    GDBusConnection* conn = _adapter.empty() ? nullptr : bluez::bus(_error);
+    _adapter = TinyCTSBlueZ::findAdapter(_adapterName, _error);
+    GDBusConnection* conn = _adapter.empty() ? nullptr : TinyCTSBlueZ::bus(_error);
     if (conn == nullptr) {
       error = _error;
       return false;
@@ -194,13 +192,13 @@ class BlueZPeripheral : public Peripheral {
   void stop() override {
     std::string ignored;
     if (_registered) {
-      bluez::call(_adapter, "org.bluez.GattManager1", "UnregisterApplication",
+      TinyCTSBlueZ::call(_adapter, "org.bluez.GattManager1", "UnregisterApplication",
                   g_variant_new("(o)", App), ignored, 2000);
-      bluez::call(_adapter, "org.bluez.LEAdvertisingManager1", "UnregisterAdvertisement",
+      TinyCTSBlueZ::call(_adapter, "org.bluez.LEAdvertisingManager1", "UnregisterAdvertisement",
                   g_variant_new("(o)", Advertisement), ignored, 2000);
       _registered = false;
     }
-    GDBusConnection* conn = bluez::bus(ignored);
+    GDBusConnection* conn = TinyCTSBlueZ::bus(ignored);
     for (guint id : _ids) {
       if (conn != nullptr) g_dbus_connection_unregister_object(conn, id);
     }
@@ -261,7 +259,7 @@ class BlueZPeripheral : public Peripheral {
   bool exportObject(const char* path, const char* iface) {
     static const GDBusInterfaceVTable vtable = {onCall, onGet, nullptr, {}};
     GError* err = nullptr;
-    GDBusConnection* conn = bluez::bus(_error);
+    GDBusConnection* conn = TinyCTSBlueZ::bus(_error);
     GDBusInterfaceInfo* info = g_dbus_node_info_lookup_interface(_nodeInfo, iface);
     guint id = conn == nullptr ? 0
                                : g_dbus_connection_register_object(conn, path, info, &vtable,
@@ -278,7 +276,7 @@ class BlueZPeripheral : public Peripheral {
   }
 
   static void onRegistered(GObject* source, GAsyncResult* res, gpointer self) {
-    BlueZPeripheral* s = static_cast<BlueZPeripheral*>(self);
+    TinyCTSBlueZPeripheral* s = static_cast<TinyCTSBlueZPeripheral*>(self);
     GError* err = nullptr;
     GVariant* r = g_dbus_connection_call_finish(G_DBUS_CONNECTION(source), res, &err);
     s->_pending--;
@@ -318,13 +316,13 @@ class BlueZPeripheral : public Peripheral {
     g_variant_builder_init(&objects, G_VARIANT_TYPE("a{oa{sa{sv}}}"));
     GVariant* service = g_variant_new_parsed(
         "{'org.bluez.GattService1': {'UUID': <%s>, 'Primary': <true>}}",
-        bluez::fullUuid(CTS_SERVICE_UUID).c_str());
+        TinyCTSBlueZ::fullUuid(CTS_SERVICE_UUID).c_str());
     g_variant_builder_add(&objects, "{o@a{sa{sv}}}", Service, service);
     for (const Chr& c : _chars) {
       GVariantBuilder props;
       g_variant_builder_init(&props, G_VARIANT_TYPE("a{sv}"));
       g_variant_builder_add(&props, "{sv}", "UUID",
-                            g_variant_new_string(bluez::fullUuid(c.uuid).c_str()));
+                            g_variant_new_string(TinyCTSBlueZ::fullUuid(c.uuid).c_str()));
       g_variant_builder_add(&props, "{sv}", "Service", g_variant_new_object_path(Service));
       g_variant_builder_add(&props, "{sv}", "Flags", flags(c));
       GVariantBuilder ifaces;
@@ -337,7 +335,7 @@ class BlueZPeripheral : public Peripheral {
 
   void emitValue(const Chr& c, const std::vector<uint8_t>& value) {
     std::string ignored;
-    GDBusConnection* conn = bluez::bus(ignored);
+    GDBusConnection* conn = TinyCTSBlueZ::bus(ignored);
     if (conn == nullptr) return;
     GVariantBuilder changed;
     g_variant_builder_init(&changed, G_VARIANT_TYPE("a{sv}"));
@@ -351,7 +349,7 @@ class BlueZPeripheral : public Peripheral {
   static void onCall(GDBusConnection*, const gchar*, const gchar* path, const gchar*,
                      const gchar* method, GVariant* params, GDBusMethodInvocation* inv,
                      gpointer self) {
-    BlueZPeripheral* s = static_cast<BlueZPeripheral*>(self);
+    TinyCTSBlueZPeripheral* s = static_cast<TinyCTSBlueZPeripheral*>(self);
     if (!strcmp(method, "GetManagedObjects")) {
       g_dbus_method_invocation_return_value(inv, s->managed());
     } else if (!strcmp(method, "ReadValue")) {
@@ -391,30 +389,30 @@ class BlueZPeripheral : public Peripheral {
 
   static GVariant* onGet(GDBusConnection*, const gchar*, const gchar* path, const gchar* iface,
                          const gchar* prop, GError**, gpointer self) {
-    BlueZPeripheral* s = static_cast<BlueZPeripheral*>(self);
+    TinyCTSBlueZPeripheral* s = static_cast<TinyCTSBlueZPeripheral*>(self);
     if (!strcmp(iface, "org.bluez.GattService1")) {
       if (!strcmp(prop, "UUID")) {
-        return g_variant_new_string(bluez::fullUuid(CTS_SERVICE_UUID).c_str());
+        return g_variant_new_string(TinyCTSBlueZ::fullUuid(CTS_SERVICE_UUID).c_str());
       }
       return g_variant_new_boolean(TRUE);
     }
     if (!strcmp(iface, "org.bluez.LEAdvertisement1")) {
       if (!strcmp(prop, "Type")) return g_variant_new_string("peripheral");
       if (!strcmp(prop, "LocalName")) return g_variant_new_string(s->_name.c_str());
-      std::string u = bluez::fullUuid(CTS_SERVICE_UUID);
+      std::string u = TinyCTSBlueZ::fullUuid(CTS_SERVICE_UUID);
       const gchar* uuids[] = {u.c_str(), nullptr};
       return g_variant_new_strv(uuids, 1);
     }
     const Chr* c = s->find(path);
     if (c == nullptr) return nullptr;
-    if (!strcmp(prop, "UUID")) return g_variant_new_string(bluez::fullUuid(c->uuid).c_str());
+    if (!strcmp(prop, "UUID")) return g_variant_new_string(TinyCTSBlueZ::fullUuid(c->uuid).c_str());
     if (!strcmp(prop, "Service")) return g_variant_new_object_path(Service);
     if (!strcmp(prop, "Notifying")) return g_variant_new_boolean(s->_notifying);
     return s->flags(*c);
   }
 
   std::string _adapterName, _adapter, _name, _error;
-  PeripheralHandler* _handler = nullptr;
+  TinyCTSPeripheralHandler* _handler = nullptr;
   GDBusNodeInfo* _nodeInfo = nullptr;
   std::vector<guint> _ids;
   Chr _chars[3];
@@ -423,15 +421,12 @@ class BlueZPeripheral : public Peripheral {
   bool _started = false, _registered = false, _notifying = false;
 };
 
-}  // namespace
-
-inline std::unique_ptr<Central> createCentral(const std::string& adapter) {
-  return std::unique_ptr<Central>(new BlueZCentral(adapter));
+inline std::unique_ptr<TinyCTSCentral> ctsCreateCentral(const std::string& adapter) {
+  return std::unique_ptr<TinyCTSCentral>(new TinyCTSBlueZCentral(adapter));
 }
 
-inline std::unique_ptr<Peripheral> createPeripheral(const std::string& adapter) {
-  return std::unique_ptr<Peripheral>(new BlueZPeripheral(adapter));
+inline std::unique_ptr<TinyCTSPeripheral> ctsCreatePeripheral(const std::string& adapter) {
+  return std::unique_ptr<TinyCTSPeripheral>(new TinyCTSBlueZPeripheral(adapter));
 }
 
-}  // namespace desktop
 }  // namespace tiny_cts

@@ -37,7 +37,7 @@ namespace tiny_cts {
  * server.end();
  * @endcode
  */
-class TinyCTSServer : public TinyCTSServerBase, private desktop::PeripheralHandler {
+class TinyCTSServer : public TinyCTSServerBase, private TinyCTSPeripheralHandler {
  public:
   TinyCTSServer() = default;
   ~TinyCTSServer() override { end(); }
@@ -56,7 +56,7 @@ class TinyCTSServer : public TinyCTSServerBase, private desktop::PeripheralHandl
     std::lock_guard<std::recursive_mutex> lock(_mutex);
     _source = &source;
     _error.clear();
-    _peripheral = desktop::createPeripheral(_adapterName);
+    _peripheral = ctsCreatePeripheral(_adapterName);
     if (!_peripheral) {
       _error = "no Bluetooth stack";
       return false;
@@ -140,7 +140,7 @@ class TinyCTSServer : public TinyCTSServerBase, private desktop::PeripheralHandl
   }
 
   std::string _adapterName = "hci0", _error;
-  std::unique_ptr<desktop::Peripheral> _peripheral;
+  std::unique_ptr<TinyCTSPeripheral> _peripheral;
   std::recursive_mutex _mutex;
   uint32_t _requests = 0;
 };

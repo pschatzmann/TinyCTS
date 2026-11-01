@@ -24,12 +24,10 @@ struct TinyCTSScanEntry {
   bool hasCts = false;  ///< advertises the Current Time Service
 };
 
-namespace desktop {
-
 /// The client side of the operating system (central role).
-class Central {
+class TinyCTSCentral {
  public:
-  virtual ~Central() = default;
+  virtual ~TinyCTSCentral() = default;
 
   /** List the devices in range. */
   virtual bool scan(uint32_t timeoutMs, std::vector<TinyCTSScanEntry>& result,
@@ -55,9 +53,9 @@ class Central {
 };
 
 /// The requests of the clients, answered by the server.
-class PeripheralHandler {
+class TinyCTSPeripheralHandler {
  public:
-  virtual ~PeripheralHandler() = default;
+  virtual ~TinyCTSPeripheralHandler() = default;
   /** A client reads a characteristic: return its value. */
   virtual bool onRead(uint16_t uuid, std::vector<uint8_t>& value) = 0;
   /** A client writes a characteristic: return false to refuse. */
@@ -67,9 +65,9 @@ class PeripheralHandler {
 /// The server side of the operating system (peripheral role): the service
 /// 0x1805 with the characteristics Current Time (read, notify, write),
 /// Local Time Information (read, write) and Reference Time Information (read).
-class Peripheral {
+class TinyCTSPeripheral {
  public:
-  virtual ~Peripheral() = default;
+  virtual ~TinyCTSPeripheral() = default;
 
   /**
    * Register the service and start the advertising.
@@ -77,7 +75,7 @@ class Peripheral {
    * @param encrypted Writing needs an encrypted (paired) connection.
    */
   virtual bool start(const std::string& name, bool settable, bool encrypted,
-                     PeripheralHandler* handler, std::string& error) = 0;
+                     TinyCTSPeripheralHandler* handler, std::string& error) = 0;
 
   /** Handle the requests, if the stack needs the application to do that. */
   virtual void process() = 0;
@@ -90,10 +88,9 @@ class Peripheral {
 };
 
 /** The client side of this operating system. @param adapter Linux: hci0 */
-std::unique_ptr<Central> createCentral(const std::string& adapter);
+std::unique_ptr<TinyCTSCentral> ctsCreateCentral(const std::string& adapter);
 
 /** The server side of this operating system. @param adapter Linux: hci0 */
-std::unique_ptr<Peripheral> createPeripheral(const std::string& adapter);
+std::unique_ptr<TinyCTSPeripheral> ctsCreatePeripheral(const std::string& adapter);
 
-}  // namespace desktop
 }  // namespace tiny_cts

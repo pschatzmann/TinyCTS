@@ -1,4 +1,4 @@
-// Central and Peripheral for Windows 10/11: C++/WinRT (Windows.Devices.Bluetooth).
+// TinyCTSCentral and TinyCTSPeripheral for Windows 10/11: C++/WinRT (Windows.Devices.Bluetooth).
 //
 // Compile with MSVC (C++17, /EHsc) and link windowsapp.lib: the CMake target
 // TinyCTS does that. UNTESTED: this file could not be compiled or run when it was
@@ -34,7 +34,6 @@ using namespace Windows::Devices::Bluetooth::Advertisement;
 using namespace Windows::Devices::Bluetooth::GenericAttributeProfile;
 using namespace Windows::Storage::Streams;
 using namespace tiny_cts;
-using namespace tiny_cts::desktop;
 
 namespace {
 
@@ -97,8 +96,8 @@ IBuffer bufferOf(const uint8_t* data, size_t len) {
   return writer.DetachBuffer();
 }
 
-// ---- Central ----------------------------------------------------------------
-class WinCentral : public Central {
+// ---- TinyCTSCentral ----------------------------------------------------------------
+class WinCentral : public TinyCTSCentral {
  public:
   WinCentral() { initApartment(); }
   ~WinCentral() override { disconnect(); }
@@ -272,13 +271,13 @@ class WinCentral : public Central {
   GattDeviceService _service{nullptr};
 };
 
-// ---- Peripheral -------------------------------------------------------------
-class WinPeripheral : public Peripheral {
+// ---- TinyCTSPeripheral -------------------------------------------------------------
+class WinPeripheral : public TinyCTSPeripheral {
  public:
   WinPeripheral() { initApartment(); }
   ~WinPeripheral() override { stop(); }
 
-  bool start(const std::string&, bool settable, bool encrypted, PeripheralHandler* handler,
+  bool start(const std::string&, bool settable, bool encrypted, TinyCTSPeripheralHandler* handler,
              std::string& error) override {
     try {
       _handler = handler;
@@ -354,7 +353,7 @@ class WinPeripheral : public Peripheral {
           auto deferral = args.GetDeferral();
           auto request = args.GetRequestAsync().get();
           std::vector<uint8_t> v;
-          PeripheralHandler* h = _handler;
+          TinyCTSPeripheralHandler* h = _handler;
           if (h != nullptr && h->onRead(uuid, v)) {
             request.RespondWithValue(bufferOf(v.data(), v.size()));
           } else {
@@ -367,7 +366,7 @@ class WinPeripheral : public Peripheral {
           auto deferral = args.GetDeferral();
           auto request = args.GetRequestAsync().get();
           std::vector<uint8_t> v = bytesOf(request.Value());
-          PeripheralHandler* h = _handler;
+          TinyCTSPeripheralHandler* h = _handler;
           bool ok = h != nullptr && h->onWrite(uuid, v.data(), v.size());
           if (request.Option() == GattWriteOption::WriteWithResponse) {
             if (ok) {
@@ -387,7 +386,7 @@ class WinPeripheral : public Peripheral {
     _chars[index] = c;
   }
 
-  PeripheralHandler* _handler = nullptr;
+  TinyCTSPeripheralHandler* _handler = nullptr;
   GattServiceProvider _provider{nullptr};
   GattLocalCharacteristic _chars[3] = {nullptr, nullptr, nullptr};
   event_token _readToken[3], _writeToken[3], _subToken;
@@ -397,17 +396,15 @@ class WinPeripheral : public Peripheral {
 }  // namespace
 
 namespace tiny_cts {
-namespace desktop {
 
-std::unique_ptr<Central> createCentral(const std::string&) {
-  return std::unique_ptr<Central>(new WinCentral());
+std::unique_ptr<TinyCTSCentral> ctsCreateCentral(const std::string&) {
+  return std::unique_ptr<TinyCTSCentral>(new WinCentral());
 }
 
-std::unique_ptr<Peripheral> createPeripheral(const std::string&) {
-  return std::unique_ptr<Peripheral>(new WinPeripheral());
+std::unique_ptr<TinyCTSPeripheral> ctsCreatePeripheral(const std::string&) {
+  return std::unique_ptr<TinyCTSPeripheral>(new WinPeripheral());
 }
 
-}  // namespace desktop
 }  // namespace tiny_cts
 
 #endif  // _WIN32 && !ARDUINO

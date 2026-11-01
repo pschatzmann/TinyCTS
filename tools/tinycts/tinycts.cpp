@@ -281,7 +281,7 @@ int tinycts_main(int argc, char** argv) {
     return 2;
   }
 #if defined(TINY_CTS_USE_BLUEZ)
-  tiny_cts::bluez::verbose() = verbose;
+  tiny_cts::TinyCTSBlueZ::verbose() = verbose;
 #else
   (void)verbose;
 #endif

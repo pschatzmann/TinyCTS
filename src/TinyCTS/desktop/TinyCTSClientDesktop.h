@@ -137,8 +137,8 @@ class TinyCTSClient : public TinyCTSClientBase {
   uint32_t getRoundTripMs() const { return _roundTripMs; }
 
  protected:
-  desktop::Central* central() {
-    if (!_central) _central = desktop::createCentral(_adapterName);
+  TinyCTSCentral* central() {
+    if (!_central) _central = ctsCreateCentral(_adapterName);
     if (!_central) _error = "no Bluetooth stack";
     return _central.get();
   }
@@ -157,7 +157,7 @@ class TinyCTSClient : public TinyCTSClientBase {
   uint32_t _roundTripMs = 0;
   std::string _adapterName = "hci0";
   std::string _error;
-  std::unique_ptr<desktop::Central> _central;
+  std::unique_ptr<TinyCTSCentral> _central;
 };
 
 }  // namespace tiny_cts
