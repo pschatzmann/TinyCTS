@@ -96,7 +96,10 @@ IBuffer bufferOf(const uint8_t* data, size_t len) {
   return writer.DetachBuffer();
 }
 
-// ---- TinyCTSCentral ----------------------------------------------------------------
+// ---- Central ----------------------------------------------------------------
+/// The client side for Windows: TinyCTSCentral with
+/// BluetoothLEAdvertisementWatcher (scan) and BluetoothLEDevice with the GATT
+/// classes (connect, read, write). The calls block with .get().
 class WinCentral : public TinyCTSCentral {
  public:
   WinCentral() { initApartment(); }
@@ -271,7 +274,9 @@ class WinCentral : public TinyCTSCentral {
   GattDeviceService _service{nullptr};
 };
 
-// ---- TinyCTSPeripheral -------------------------------------------------------------
+// ---- Peripheral -------------------------------------------------------------
+/// The server side for Windows: TinyCTSPeripheral with GattServiceProvider. The
+/// events for the read and write requests come from threads of the system.
 class WinPeripheral : public TinyCTSPeripheral {
  public:
   WinPeripheral() { initApartment(); }

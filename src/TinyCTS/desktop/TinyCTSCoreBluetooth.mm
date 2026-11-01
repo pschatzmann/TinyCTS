@@ -63,7 +63,10 @@ static std::string stateError(CBManagerState state) {
   }
 }
 
-// ---- TinyCTSCentral ----------------------------------------------------------------
+// ---- Central ----------------------------------------------------------------
+/// The delegate of CBCentralManager and CBPeripheral: collects the devices that
+/// are found, connects to one and keeps the characteristics of its Current
+/// Time Service. The delegate methods run on a dispatch queue of their own.
 @interface TCCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 @property(strong) dispatch_queue_t queue;
 @property(strong) CBCentralManager* manager;
@@ -165,6 +168,8 @@ static std::string stateError(CBManagerState state) {
 }
 @end
 
+/// The client side for macOS: TinyCTSCentral on top of TCCentral. The functions
+/// block until the delegate has set the flag that they wait for.
 class CoreBluetoothCentral : public TinyCTSCentral {
  public:
   CoreBluetoothCentral() { _c = [TCCentral new]; }
@@ -316,7 +321,10 @@ class CoreBluetoothCentral : public TinyCTSCentral {
   TCCentral* _c;
 };
 
-// ---- TinyCTSPeripheral -------------------------------------------------------------
+// ---- Peripheral -------------------------------------------------------------
+/// The delegate of CBPeripheralManager: adds the service, advertises it and
+/// answers the read and write requests with the PeripheralHandler. The
+/// delegate methods run on a dispatch queue of their own.
 @interface TCPeripheral : NSObject <CBPeripheralManagerDelegate>
 {
  @public
@@ -401,6 +409,7 @@ class CoreBluetoothCentral : public TinyCTSCentral {
 }
 @end
 
+/// The server side for macOS: TinyCTSPeripheral on top of TCPeripheral.
 class CoreBluetoothPeripheral : public TinyCTSPeripheral {
  public:
   CoreBluetoothPeripheral() { _p = [TCPeripheral new]; }

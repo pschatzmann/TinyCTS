@@ -11,6 +11,12 @@
 
 namespace tiny_cts {
 
+/**
+ * @class TinyCTSBlueZCentral
+ * @brief The client side for Linux: scans, connects and reads or writes the
+ * characteristics through BlueZ (org.bluez.Adapter1, Device1 and
+ * GattCharacteristic1) with the functions of TinyCTSBlueZ.
+ */
 class TinyCTSBlueZCentral : public TinyCTSCentral {
  public:
   explicit TinyCTSBlueZCentral(const std::string& adapter) : _adapterName(adapter) {}
@@ -119,6 +125,13 @@ class TinyCTSBlueZCentral : public TinyCTSCentral {
   TinyCTSBlueZ::Device _device;
 };
 
+/**
+ * @class TinyCTSBlueZPeripheral
+ * @brief The server side for Linux: exports the Current Time Service as a GATT
+ * application and an advertisement on D-Bus and registers them at BlueZ
+ * (GattManager1 and LEAdvertisingManager1). BlueZ calls back over D-Bus, so
+ * process() has to run the main context of GLib.
+ */
 class TinyCTSBlueZPeripheral : public TinyCTSPeripheral {
  public:
   explicit TinyCTSBlueZPeripheral(const std::string& adapter) : _adapterName(adapter) {}
@@ -214,6 +227,7 @@ class TinyCTSBlueZPeripheral : public TinyCTSPeripheral {
   static constexpr const char* Service = "/org/tinycts/service0";
   static constexpr const char* Advertisement = "/org/tinycts/adv0";
 
+  /// A characteristic of the exported service: its object path and UUID
   struct Chr {
     std::string path;
     uint16_t uuid = 0;
