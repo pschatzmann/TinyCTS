@@ -24,10 +24,13 @@ A minimal, header-only Bluetooth Low Energy **Current Time Service** (CTS, GATT 
 - Optionally lets paired clients set the time
 
 **General**
-- `tinycts`: command line tool for the desktop (Linux, macOS, Windows) to read the time of a device, serve the time of your computer, set the time of a device and show the time zone of your computer
-- The same classes on ESP32, nRF5, Arduino Nano 33 BLE / Uno R4 WiFi (ArduinoBLE), Raspberry Pi Pico W and the desktop
+- `tinycts`: command line tool for the desktop (Linux; macOS and Windows are *experimental*) to read the time of a device, serve the time of your computer, set the time of a device and show the time zone of your computer
+- The same classes on ESP32, nRF5, Arduino Nano 33 BLE / Uno R4 WiFi (ArduinoBLE), Raspberry Pi Pico W and the desktop (Linux; macOS and Windows are *experimental*)
 - Header-only, easy to integrate
 - cmake support
+
+
+**Experimental:** the backends for macOS (CoreBluetooth) and Windows (WinRT) have not been compiled or run yet. They are included so that they can be tried and improved; please report problems.
 
 
 ## Quick Start
@@ -74,7 +77,7 @@ Include `TinyCTS.h`: it provides everything. All classes are in the namespace `t
 ## Documentation
 
 - [Class Documentation](https://pschatzmann.github.io/TinyCTS/annotated.html)
-- [Bluetooth Stacks](https://github.com/pschatzmann/TinyCTS/wiki/Bluetooth-Stacks): the supported platforms (ESP32, nRF5, ArduinoBLE boards, Pico W, Linux, macOS, Windows), notes for each and the source layout
+- [Bluetooth Stacks](https://github.com/pschatzmann/TinyCTS/wiki/Bluetooth-Stacks): the supported platforms (ESP32, nRF5, ArduinoBLE boards, Pico W, Linux, macOS and Windows (experimental)), notes for each and the source layout
 - [CTS or NTP?](https://github.com/pschatzmann/TinyCTS/wiki/CTS-or-NTP): what Bluetooth time is good for, where NTP is better, and how to use both together with TinyNTP
 - [Time Zones](https://github.com/pschatzmann/TinyCTS/wiki/Time-Zones): Local Time Information, UTC or local time
 - [Server Time Sources](https://github.com/pschatzmann/TinyCTS/wiki/Server-Time-Sources): software clock, system time, TinyNTP and your own sources for the server
