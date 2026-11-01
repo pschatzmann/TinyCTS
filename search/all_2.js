@@ -1,9 +1,9 @@
 var searchData=
 [
   ['call_0',['call',['../structtiny__cts_1_1_tiny_c_t_s_blue_z.html#af3090d03a85d2c0a8f73ead32d0abcf1',1,'tiny_cts::TinyCTSBlueZ']]],
-  ['connect_1',['connect',['../classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aa6a7fc85f78be1263a55800645638b8b',1,'tiny_cts::TinyCTSBlueZCentral::connect()'],['../class_core_bluetooth_central.html#a51a2f6995d41cad6c08a9510aa49f3a4',1,'CoreBluetoothCentral::connect()'],['../classtiny__cts_1_1_tiny_c_t_s_central.html#a2edcefc15032240915ec813bc75429e7',1,'tiny_cts::TinyCTSCentral::connect()'],['../classanonymous__namespace_02_tiny_c_t_s_win_r_t_8cpp_03_1_1_win_central.html#afa7c4dae09f50997634ce090b8256c6d',1,'anonymous_namespace{TinyCTSWinRT.cpp}::WinCentral::connect()']]],
-  ['corebluetoothcentral_2',['CoreBluetoothCentral',['../class_core_bluetooth_central.html',1,'']]],
-  ['corebluetoothperipheral_3',['CoreBluetoothPeripheral',['../class_core_bluetooth_peripheral.html',1,'']]],
+  ['connect_1',['connect',['../classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aa6a7fc85f78be1263a55800645638b8b',1,'tiny_cts::TinyCTSBlueZCentral::connect()'],['../classanonymous__namespace_02_tiny_c_t_s_core_bluetooth_8mm_03_1_1_core_bluetooth_central.html#aadfdf44ebd2e34232bc1154fa6858a46',1,'anonymous_namespace{TinyCTSCoreBluetooth.mm}::CoreBluetoothCentral::connect()'],['../classtiny__cts_1_1_tiny_c_t_s_central.html#a2edcefc15032240915ec813bc75429e7',1,'tiny_cts::TinyCTSCentral::connect()'],['../classanonymous__namespace_02_tiny_c_t_s_win_r_t_8cpp_03_1_1_win_central.html#afa7c4dae09f50997634ce090b8256c6d',1,'anonymous_namespace{TinyCTSWinRT.cpp}::WinCentral::connect()']]],
+  ['corebluetoothcentral_2',['CoreBluetoothCentral',['../classanonymous__namespace_02_tiny_c_t_s_core_bluetooth_8mm_03_1_1_core_bluetooth_central.html',1,'anonymous_namespace{TinyCTSCoreBluetooth.mm}']]],
+  ['corebluetoothperipheral_3',['CoreBluetoothPeripheral',['../classanonymous__namespace_02_tiny_c_t_s_core_bluetooth_8mm_03_1_1_core_bluetooth_peripheral.html',1,'anonymous_namespace{TinyCTSCoreBluetooth.mm}']]],
   ['cts_4',['cts',['../structtiny__cts_1_1_tiny_c_t_s_blue_z_1_1_device.html#a3e0437682f8c408930875b088c9a3c7a',1,'tiny_cts::TinyCTSBlueZ::Device']]],
   ['cts_5fcurrent_5ftime_5fuuid_5',['CTS_CURRENT_TIME_UUID',['../_tiny_c_t_s_types_8h.html#a1aa584cffa4c75376698a2a0b4eefc54',1,'tiny_cts']]],
   ['cts_5flocal_5ftime_5finfo_5fuuid_6',['CTS_LOCAL_TIME_INFO_UUID',['../_tiny_c_t_s_types_8h.html#a705735394a5ae9330d6f8d9e307cfa92',1,'tiny_cts']]],

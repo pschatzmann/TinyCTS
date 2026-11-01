@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['tccentral_0',['TCCentral',['../interface_t_c_central.html',1,'']]],
-  ['tcperipheral_1',['TCPeripheral',['../interface_t_c_peripheral.html',1,'']]],
-  ['tinyctsbluez_2',['TinyCTSBlueZ',['../structtiny__cts_1_1_tiny_c_t_s_blue_z.html',1,'tiny_cts']]],
-  ['tinyctsbluezcentral_3',['TinyCTSBlueZCentral',['../classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html',1,'tiny_cts']]],
-  ['tinyctsbluezperipheral_4',['TinyCTSBlueZPeripheral',['../classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html',1,'tiny_cts']]],
+  ['tinyctsbluez_0',['TinyCTSBlueZ',['../structtiny__cts_1_1_tiny_c_t_s_blue_z.html',1,'tiny_cts']]],
+  ['tinyctsbluezcentral_1',['TinyCTSBlueZCentral',['../classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html',1,'tiny_cts']]],
+  ['tinyctsbluezperipheral_2',['TinyCTSBlueZPeripheral',['../classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html',1,'tiny_cts']]],
+  ['tinyctscbcentral_3',['TinyCTSCBCentral',['../interface_tiny_c_t_s_c_b_central.html',1,'']]],
+  ['tinyctscbperipheral_4',['TinyCTSCBPeripheral',['../interface_tiny_c_t_s_c_b_peripheral.html',1,'']]],
   ['tinyctscentral_5',['TinyCTSCentral',['../classtiny__cts_1_1_tiny_c_t_s_central.html',1,'tiny_cts']]],
   ['tinyctsclient_6',['TinyCTSClient',['../classtiny__cts_1_1_tiny_c_t_s_client.html',1,'tiny_cts']]],
   ['tinyctsclientbase_7',['TinyCTSClientBase',['../classtiny__cts_1_1_tiny_c_t_s_client_base.html',1,'tiny_cts']]],
