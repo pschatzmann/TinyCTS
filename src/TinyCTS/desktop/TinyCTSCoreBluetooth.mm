@@ -64,9 +64,14 @@ static std::string stateError(CBManagerState state) {
 }
 
 // ---- Central ----------------------------------------------------------------
-/// The delegate of CBCentralManager and CBPeripheral: collects the devices that
-/// are found, connects to one and keeps the characteristics of its Current
-/// Time Service. The delegate methods run on a dispatch queue of their own.
+/**
+ * @class TinyCTSCBCentral
+ * @brief The delegate of CBCentralManager and CBPeripheral (Objective-C):
+ * collects the devices that are found, connects to one and keeps the
+ * characteristics of its Current Time Service. The delegate methods run on a
+ * dispatch queue of their own, so the properties are the flags and results
+ * that CoreBluetoothCentral waits for.
+ */
 @interface TinyCTSCBCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 @property(strong) dispatch_queue_t queue;
 @property(strong) CBCentralManager* manager;
@@ -170,8 +175,13 @@ static std::string stateError(CBManagerState state) {
 
 namespace {
 
-/// The client side for macOS: TinyCTSCentral on top of TinyCTSCBCentral. The functions
-/// block until the delegate has set the flag that they wait for.
+/**
+ * @class CoreBluetoothCentral
+ * @brief The client side for macOS: TinyCTSCentral on top of TinyCTSCBCentral.
+ * The functions block until the delegate has set the flag that they wait for.
+ * macOS gives the devices an identifier (UUID) instead of the Bluetooth
+ * address: it is used as the address.
+ */
 class CoreBluetoothCentral : public TinyCTSCentral {
  public:
   CoreBluetoothCentral() { _c = [TinyCTSCBCentral new]; }
@@ -326,9 +336,13 @@ class CoreBluetoothCentral : public TinyCTSCentral {
 }  // namespace
 
 // ---- Peripheral -------------------------------------------------------------
-/// The delegate of CBPeripheralManager: adds the service, advertises it and
-/// answers the read and write requests with the TinyCTSPeripheralHandler. The
-/// delegate methods run on a dispatch queue of their own.
+/**
+ * @class TinyCTSCBPeripheral
+ * @brief The delegate of CBPeripheralManager (Objective-C): adds the service,
+ * advertises it and answers the read and write requests with the
+ * TinyCTSPeripheralHandler. The delegate methods run on a dispatch queue of
+ * their own.
+ */
 @interface TinyCTSCBPeripheral : NSObject <CBPeripheralManagerDelegate>
 {
  @public
@@ -415,7 +429,12 @@ class CoreBluetoothCentral : public TinyCTSCentral {
 
 namespace {
 
-/// The server side for macOS: TinyCTSPeripheral on top of TinyCTSCBPeripheral.
+/**
+ * @class CoreBluetoothPeripheral
+ * @brief The server side for macOS: TinyCTSPeripheral on top of
+ * TinyCTSCBPeripheral. The requests are answered by the dispatch queue of
+ * CoreBluetooth, so process() has nothing to do.
+ */
 class CoreBluetoothPeripheral : public TinyCTSPeripheral {
  public:
   CoreBluetoothPeripheral() { _p = [TinyCTSCBPeripheral new]; }

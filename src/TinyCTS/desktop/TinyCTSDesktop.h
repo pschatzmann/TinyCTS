@@ -24,7 +24,17 @@ struct TinyCTSScanEntry {
   bool hasCts = false;  ///< advertises the Current Time Service
 };
 
-/// The client side of the operating system (central role).
+/**
+ * @class TinyCTSCentral
+ * @brief The client side (central role) of the Bluetooth stack of the operating
+ * system: finds a device, connects to it and reads or writes the
+ * characteristics of its Current Time Service.
+ *
+ * All the functions block until they are done and give the reason in the error
+ * string when they fail. BlueZ (Linux), CoreBluetooth (macOS) and WinRT
+ * (Windows) each implement it; TinyCTSClient uses it. Get an object with
+ * ctsCreateCentral().
+ */
 class TinyCTSCentral {
  public:
   virtual ~TinyCTSCentral() = default;
@@ -52,7 +62,15 @@ class TinyCTSCentral {
   virtual void disconnect() = 0;
 };
 
-/// The requests of the clients, answered by the server.
+/**
+ * @class TinyCTSPeripheralHandler
+ * @brief The callbacks of a TinyCTSPeripheral: it asks the handler for the value
+ * when a client reads a characteristic, and passes on what a client writes.
+ * TinyCTSServer implements it.
+ *
+ * The functions may be called from a thread of the Bluetooth stack (macOS,
+ * Windows) or from TinyCTSPeripheral::process() (Linux).
+ */
 class TinyCTSPeripheralHandler {
  public:
   virtual ~TinyCTSPeripheralHandler() = default;
@@ -62,9 +80,18 @@ class TinyCTSPeripheralHandler {
   virtual bool onWrite(uint16_t uuid, const uint8_t* data, size_t len) = 0;
 };
 
-/// The server side of the operating system (peripheral role): the service
-/// 0x1805 with the characteristics Current Time (read, notify, write),
-/// Local Time Information (read, write) and Reference Time Information (read).
+/**
+ * @class TinyCTSPeripheral
+ * @brief The server side (peripheral role) of the Bluetooth stack of the
+ * operating system: offers the Current Time Service (0x1805) with the
+ * characteristics Current Time (read, notify, write), Local Time Information
+ * (read, write) and Reference Time Information (read), and advertises it.
+ *
+ * The values are not stored: the requests of the clients are given to a
+ * TinyCTSPeripheralHandler. BlueZ (Linux), CoreBluetooth (macOS) and WinRT
+ * (Windows) each implement it; TinyCTSServer uses it. Get an object with
+ * ctsCreatePeripheral().
+ */
 class TinyCTSPeripheral {
  public:
   virtual ~TinyCTSPeripheral() = default;
