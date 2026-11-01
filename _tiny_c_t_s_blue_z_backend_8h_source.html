@@ -88,488 +88,481 @@ $(function() {
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="_tiny_c_t_s_desktop_8h.html">TinyCTSDesktop.h</a>&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>tiny_cts {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>desktop {</div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacetiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03.html">   14</a></span><span class="keyword">namespace </span>{</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html">   16</a></span><span class="keyword">class </span>BlueZCentral : <span class="keyword">public</span> <a class="code hl_class" href="classtiny__cts_1_1desktop_1_1_central.html">Central</a> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keyword">explicit</span> BlueZCentral(<span class="keyword">const</span> std::string&amp; adapter) : _adapterName(adapter) {}</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  ~BlueZCentral()<span class="keyword"> override </span>{ <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#affa348e31d8cf6fcb683faf46576b46a">disconnect</a>(); }</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#a69eae63a0b38868634f5dc580a892ec8">   21</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#a69eae63a0b38868634f5dc580a892ec8">scan</a>(uint32_t timeoutMs, std::vector&lt;TinyCTSScanEntry&gt;&amp; result,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            std::string&amp; error)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">if</span> (!open(error)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    std::vector&lt;bluez::Device&gt; devices = <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#a0d5cf6b7af589d2bbe9815884ecb09d8">bluez::discover</a>(</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        _adapter, timeoutMs, [](<span class="keyword">const</span> std::vector&lt;bluez::Device&gt;&amp;) { <span class="keywordflow">return</span> <span class="keyword">false</span>; }, error);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1bluez_1_1_device.html">bluez::Device</a>&amp; d : devices) {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>      <span class="keywordflow">if</span> (d.seen) result.push_back(entry(d));</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html">   14</a></span><span class="keyword">class </span>TinyCTSBlueZCentral : <span class="keyword">public</span> <a class="code hl_class" href="classtiny__cts_1_1_tiny_c_t_s_central.html">TinyCTSCentral</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keyword">explicit</span> TinyCTSBlueZCentral(<span class="keyword">const</span> std::string&amp; adapter) : _adapterName(adapter) {}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  ~TinyCTSBlueZCentral()<span class="keyword"> override </span>{ <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a7e6b6def9c31950a195d381bd8188e45">disconnect</a>(); }</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aaa313779d8918ed8e2dc0e1e1532b729">   19</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aaa313779d8918ed8e2dc0e1e1532b729">scan</a>(uint32_t timeoutMs, std::vector&lt;TinyCTSScanEntry&gt;&amp; result,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            std::string&amp; error)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (!open(error)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::vector&lt;TinyCTSBlueZ::Device&gt; devices = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a87f8da9186b50e34a8a3b0314b8567e2">TinyCTSBlueZ::discover</a>(</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        _adapter, timeoutMs, [](<span class="keyword">const</span> std::vector&lt;TinyCTSBlueZ::Device&gt;&amp;) { <span class="keywordflow">return</span> <span class="keyword">false</span>; }, error);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_blue_z_1_1_device.html">TinyCTSBlueZ::Device</a>&amp; d : devices) {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>      <span class="keywordflow">if</span> (d.seen) result.push_back(entry(d));</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  }</div>
 </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#a2bb8c3a82f488551d48f6a6c6dc8fd26">   32</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#a2bb8c3a82f488551d48f6a6c6dc8fd26">connect</a>(<span class="keyword">const</span> std::string&amp; wanted, uint32_t timeoutMs, <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html">TinyCTSScanEntry</a>&amp; found,</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>               std::string&amp; error)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#affa348e31d8cf6fcb683faf46576b46a">disconnect</a>();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">if</span> (!open(error)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    std::vector&lt;bluez::Device&gt; devices = <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#a0d5cf6b7af589d2bbe9815884ecb09d8">bluez::discover</a>(</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        _adapter, timeoutMs,</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        [&amp;](<span class="keyword">const</span> std::vector&lt;bluez::Device&gt;&amp; l) { <span class="keywordflow">return</span> pick(l, wanted) != <span class="keyword">nullptr</span>; }, error);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1bluez_1_1_device.html">bluez::Device</a>* d = pick(devices, wanted);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> (d == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      error = wanted.empty() ? <span class="stringliteral">&quot;no device with the Current Time Service found&quot;</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                             : <span class="stringliteral">&quot;device &quot;</span> + wanted + <span class="stringliteral">&quot; not found&quot;</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    _device = *d;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> (!_device.connected &amp;&amp;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#ae806d708b7db6c5b572e88bb78ff4d24">bluez::call</a>(_device.path, <span class="stringliteral">&quot;org.bluez.Device1&quot;</span>, <span class="stringliteral">&quot;Connect&quot;</span>, <span class="keyword">nullptr</span>, error, 30000) ==</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      error = <span class="stringliteral">&quot;cannot connect to &quot;</span> + _device.address + <span class="stringliteral">&quot;: &quot;</span> + error;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      _device = <a class="code hl_struct" href="structtiny__cts_1_1bluez_1_1_device.html">bluez::Device</a>();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 100; i++) {  <span class="comment">// up to 10 s</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1bluez_1_1_device.html">bluez::Device</a>&amp; l : bluez::listDevices(_adapter)) {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">if</span> (l.path == _device.path &amp;&amp; l.resolved) {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>          found = entry(_device);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>          <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      g_usleep(100 * 1000);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    error = <span class="stringliteral">&quot;no services from &quot;</span> + _device.address;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#affa348e31d8cf6fcb683faf46576b46a">disconnect</a>();</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aa6a7fc85f78be1263a55800645638b8b">   30</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aa6a7fc85f78be1263a55800645638b8b">connect</a>(<span class="keyword">const</span> std::string&amp; wanted, uint32_t timeoutMs, <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html">TinyCTSScanEntry</a>&amp; found,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>               std::string&amp; error)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a7e6b6def9c31950a195d381bd8188e45">disconnect</a>();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> (!open(error)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    std::vector&lt;TinyCTSBlueZ::Device&gt; devices = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a87f8da9186b50e34a8a3b0314b8567e2">TinyCTSBlueZ::discover</a>(</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        _adapter, timeoutMs,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        [&amp;](<span class="keyword">const</span> std::vector&lt;TinyCTSBlueZ::Device&gt;&amp; l) { <span class="keywordflow">return</span> pick(l, wanted) != <span class="keyword">nullptr</span>; }, error);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_blue_z_1_1_device.html">TinyCTSBlueZ::Device</a>* d = pick(devices, wanted);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (d == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      error = wanted.empty() ? <span class="stringliteral">&quot;no device with the Current Time Service found&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                             : <span class="stringliteral">&quot;device &quot;</span> + wanted + <span class="stringliteral">&quot; not found&quot;</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    _device = *d;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">if</span> (!_device.connected &amp;&amp;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#af3090d03a85d2c0a8f73ead32d0abcf1">TinyCTSBlueZ::call</a>(_device.path, <span class="stringliteral">&quot;org.bluez.Device1&quot;</span>, <span class="stringliteral">&quot;Connect&quot;</span>, <span class="keyword">nullptr</span>, error, 30000) ==</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      error = <span class="stringliteral">&quot;cannot connect to &quot;</span> + _device.address + <span class="stringliteral">&quot;: &quot;</span> + error;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      _device = <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_blue_z_1_1_device.html">TinyCTSBlueZ::Device</a>();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 100; i++) {  <span class="comment">// up to 10 s</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_blue_z_1_1_device.html">TinyCTSBlueZ::Device</a>&amp; l : TinyCTSBlueZ::listDevices(_adapter)) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">if</span> (l.path == _device.path &amp;&amp; l.resolved) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>          found = entry(_device);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>          <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      g_usleep(100 * 1000);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    error = <span class="stringliteral">&quot;no services from &quot;</span> + _device.address;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a7e6b6def9c31950a195d381bd8188e45">disconnect</a>();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  }</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#aa8b3c87bee1b62d052be18975366129c">   67</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#aa8b3c87bee1b62d052be18975366129c">read</a>(uint16_t uuid, std::vector&lt;uint8_t&gt;&amp; value, std::string&amp; error)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::string path = <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#a3c43d477074a756d1fe1449aff2843ad">bluez::findCharacteristic</a>(_device.path, uuid);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">if</span> (path.empty()) {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      error = <span class="stringliteral">&quot;the device does not have the characteristic&quot;</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">return</span> bluez::readValue(path, value, error);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aa516e366c3f19b41855dde7e91d58892">   65</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aa516e366c3f19b41855dde7e91d58892">read</a>(uint16_t uuid, std::vector&lt;uint8_t&gt;&amp; value, std::string&amp; error)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    std::string path = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aefbfceb7f179f834746949832bf0c4c1">TinyCTSBlueZ::findCharacteristic</a>(_device.path, uuid);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">if</span> (path.empty()) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      error = <span class="stringliteral">&quot;the device does not have the characteristic&quot;</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">return</span> TinyCTSBlueZ::readValue(path, value, error);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
 </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#ad881e70946b253e99da72c619d1f7dfc">   76</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#ad881e70946b253e99da72c619d1f7dfc">write</a>(uint16_t uuid, <span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len, std::string&amp; error)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    std::string path = <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#a3c43d477074a756d1fe1449aff2843ad">bluez::findCharacteristic</a>(_device.path, uuid);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (path.empty()) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      error = <span class="stringliteral">&quot;the device does not have the characteristic&quot;</span>;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">return</span> bluez::writeValue(path, data, len, error);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a564f80130cb990779ce41c0e5510e7fe">   74</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a564f80130cb990779ce41c0e5510e7fe">write</a>(uint16_t uuid, <span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len, std::string&amp; error)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    std::string path = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aefbfceb7f179f834746949832bf0c4c1">TinyCTSBlueZ::findCharacteristic</a>(_device.path, uuid);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">if</span> (path.empty()) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      error = <span class="stringliteral">&quot;the device does not have the characteristic&quot;</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">return</span> TinyCTSBlueZ::writeValue(path, data, len, error);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  }</div>
 </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#affa348e31d8cf6fcb683faf46576b46a">   85</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#affa348e31d8cf6fcb683faf46576b46a">disconnect</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">if</span> (_device.path.empty()) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    std::string ignored;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#ae806d708b7db6c5b572e88bb78ff4d24">bluez::call</a>(_device.path, <span class="stringliteral">&quot;org.bluez.Device1&quot;</span>, <span class="stringliteral">&quot;Disconnect&quot;</span>, <span class="keyword">nullptr</span>, ignored);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    _device = <a class="code hl_struct" href="structtiny__cts_1_1bluez_1_1_device.html">bluez::Device</a>();</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a7e6b6def9c31950a195d381bd8188e45">   83</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a7e6b6def9c31950a195d381bd8188e45">disconnect</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">if</span> (_device.path.empty()) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    std::string ignored;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#af3090d03a85d2c0a8f73ead32d0abcf1">TinyCTSBlueZ::call</a>(_device.path, <span class="stringliteral">&quot;org.bluez.Device1&quot;</span>, <span class="stringliteral">&quot;Disconnect&quot;</span>, <span class="keyword">nullptr</span>, ignored);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    _device = <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_blue_z_1_1_device.html">TinyCTSBlueZ::Device</a>();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  }</div>
 </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordtype">bool</span> open(std::string&amp; error) {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    error.clear();</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    _adapter = <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#a736853b7f864f66fc3de84b71862ae16">bluez::findAdapter</a>(_adapterName, error);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">return</span> !_adapter.empty();</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keyword">static</span> <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html">TinyCTSScanEntry</a> entry(<span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1bluez_1_1_device.html">bluez::Device</a>&amp; d) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_struct" href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html">TinyCTSScanEntry</a> e;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    e.<a class="code hl_variable" href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html#ab7605ec640214c37b359852b1afd770c">address</a> = d.address;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    e.name = d.name;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    e.rssi = d.rssi;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    e.<a class="code hl_variable" href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html#a0a00988f681da04806a715488d5ba0b9">hasCts</a> = d.<a class="code hl_variable" href="structtiny__cts_1_1bluez_1_1_device.html#aa721aa50a8e604ae5ae5e6cef9492a4d">cts</a>;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordflow">return</span> e;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1bluez_1_1_device.html">bluez::Device</a>* pick(<span class="keyword">const</span> std::vector&lt;bluez::Device&gt;&amp; devices,</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                                   <span class="keyword">const</span> std::string&amp; wanted) {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_struct" href="structtiny__cts_1_1bluez_1_1_device.html">bluez::Device</a>&amp; d : devices) {</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      <span class="keywordflow">if</span> (wanted.empty()) {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">if</span> (d.cts &amp;&amp; d.seen) <span class="keywordflow">return</span> &amp;d;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bluez::equalsIgnoreCase(d.address, wanted) || d.name == wanted) {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">if</span> (d.seen || d.connected) <span class="keywordflow">return</span> &amp;d;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      }</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  std::string _adapterName, _adapter;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  bluez::Device _device;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>};</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keywordtype">bool</span> open(std::string&amp; error) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    error.clear();</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    _adapter = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a53b249b4e6cbf3225ac904a0e5899e9a">TinyCTSBlueZ::findAdapter</a>(_adapterName, error);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">return</span> !_adapter.empty();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keyword">static</span> TinyCTSScanEntry entry(<span class="keyword">const</span> TinyCTSBlueZ::Device&amp; d) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    TinyCTSScanEntry e;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    e.address = d.address;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    e.name = d.name;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    e.rssi = d.rssi;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    e.hasCts = d.cts;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">return</span> e;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keyword">static</span> <span class="keyword">const</span> TinyCTSBlueZ::Device* pick(<span class="keyword">const</span> std::vector&lt;TinyCTSBlueZ::Device&gt;&amp; devices,</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                                   <span class="keyword">const</span> std::string&amp; wanted) {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> TinyCTSBlueZ::Device&amp; d : devices) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <span class="keywordflow">if</span> (wanted.empty()) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">if</span> (d.cts &amp;&amp; d.seen) <span class="keywordflow">return</span> &amp;d;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (TinyCTSBlueZ::equalsIgnoreCase(d.address, wanted) || d.name == wanted) {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">if</span> (d.seen || d.connected) <span class="keywordflow">return</span> &amp;d;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  std::string _adapterName, _adapter;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  TinyCTSBlueZ::Device _device;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>};</div>
 </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="foldopen" id="foldopen00124" data-start="{" data-end="};">
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html">  124</a></span><span class="keyword">class </span>BlueZPeripheral : <span class="keyword">public</span> <a class="code hl_class" href="classtiny__cts_1_1desktop_1_1_peripheral.html">Peripheral</a> {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keyword">explicit</span> BlueZPeripheral(<span class="keyword">const</span> std::string&amp; adapter) : _adapterName(adapter) {}</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  ~BlueZPeripheral()<span class="keyword"> override </span>{ <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a50c3228d56c4c7d0ea530114d709eb98">stop</a>(); }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a5e3be6de2152ee4403547b95d00aafed">  129</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a5e3be6de2152ee4403547b95d00aafed">start</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">bool</span> settable, <span class="keywordtype">bool</span> encrypted,</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>             <a class="code hl_class" href="classtiny__cts_1_1desktop_1_1_peripheral_handler.html">PeripheralHandler</a>* handler, std::string&amp; error)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    _handler = handler;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    _name = name;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    _settable = settable;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    _encrypted = encrypted;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    _error.clear();</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    _adapter = <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#a736853b7f864f66fc3de84b71862ae16">bluez::findAdapter</a>(_adapterName, _error);</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    GDBusConnection* conn = _adapter.empty() ? nullptr : <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#ab082607f8a39590c45d832ce96f39af4">bluez::bus</a>(_error);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordflow">if</span> (conn == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>      error = _error;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    _nodeInfo = g_dbus_node_info_new_for_xml(xml(), <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    _chars[0] = {std::string(Service) + <span class="stringliteral">&quot;/char0&quot;</span>, <a class="code hl_variable" href="_tiny_c_t_s_types_8h.html#a1aa584cffa4c75376698a2a0b4eefc54">CTS_CURRENT_TIME_UUID</a>, <span class="keyword">true</span>};</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    _chars[1] = {std::string(Service) + <span class="stringliteral">&quot;/char1&quot;</span>, <a class="code hl_variable" href="_tiny_c_t_s_types_8h.html#a705735394a5ae9330d6f8d9e307cfa92">CTS_LOCAL_TIME_INFO_UUID</a>, <span class="keyword">false</span>};</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    _chars[2] = {std::string(Service) + <span class="stringliteral">&quot;/char2&quot;</span>, <a class="code hl_variable" href="_tiny_c_t_s_types_8h.html#a3ce5c3a68c37b6cd9eb8951f4b71b371">CTS_REFERENCE_TIME_INFO_UUID</a>, <span class="keyword">false</span>};</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">if</span> (!exportObject(App, <span class="stringliteral">&quot;org.freedesktop.DBus.ObjectManager&quot;</span>) ||</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        !exportObject(Service, <span class="stringliteral">&quot;org.bluez.GattService1&quot;</span>) ||</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        !exportObject(_chars[0].path.c_str(), <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>) ||</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        !exportObject(_chars[1].path.c_str(), <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>) ||</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        !exportObject(_chars[2].path.c_str(), <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>) ||</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        !exportObject(Advertisement, <span class="stringliteral">&quot;org.bluez.LEAdvertisement1&quot;</span>)) {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>      error = _error;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a50c3228d56c4c7d0ea530114d709eb98">stop</a>();</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    }</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    _started = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="comment">// BlueZ calls back while it registers: the main loop has to run</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    _pending = 2;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    g_dbus_connection_call(conn, <span class="stringliteral">&quot;org.bluez&quot;</span>, _adapter.c_str(), <span class="stringliteral">&quot;org.bluez.GattManager1&quot;</span>,</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                           <span class="stringliteral">&quot;RegisterApplication&quot;</span>, g_variant_new_parsed(<span class="stringliteral">&quot;(%o, @a{sv} {})&quot;</span>, App),</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                           <span class="keyword">nullptr</span>, G_DBUS_CALL_FLAGS_NONE, 20000, <span class="keyword">nullptr</span>, onRegistered, <span class="keyword">this</span>);</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    g_dbus_connection_call(conn, <span class="stringliteral">&quot;org.bluez&quot;</span>, _adapter.c_str(),</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                           <span class="stringliteral">&quot;org.bluez.LEAdvertisingManager1&quot;</span>, <span class="stringliteral">&quot;RegisterAdvertisement&quot;</span>,</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                           g_variant_new_parsed(<span class="stringliteral">&quot;(%o, @a{sv} {})&quot;</span>, Advertisement), <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                           G_DBUS_CALL_FLAGS_NONE, 20000, <span class="keyword">nullptr</span>, onRegistered, <span class="keyword">this</span>);</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4000 &amp;&amp; _pending &gt; 0; i++) {  <span class="comment">// up to 20 s</span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>      <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#abd1d1426289f484ef463ab57c45930ba">process</a>();</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>      g_usleep(5 * 1000);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    }</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">if</span> (_pending &gt; 0 &amp;&amp; _error.empty()) _error = <span class="stringliteral">&quot;BlueZ does not answer&quot;</span>;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordflow">if</span> (!_error.empty()) {</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      error = _error;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a50c3228d56c4c7d0ea530114d709eb98">stop</a>();</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    _registered = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="};">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html">  122</a></span><span class="keyword">class </span>TinyCTSBlueZPeripheral : <span class="keyword">public</span> <a class="code hl_class" href="classtiny__cts_1_1_tiny_c_t_s_peripheral.html">TinyCTSPeripheral</a> {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  <span class="keyword">explicit</span> TinyCTSBlueZPeripheral(<span class="keyword">const</span> std::string&amp; adapter) : _adapterName(adapter) {}</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  ~TinyCTSBlueZPeripheral()<span class="keyword"> override </span>{ <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a826e3be3371325b1f04b0b669e93d0d8">stop</a>(); }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="foldopen" id="foldopen00127" data-start="{" data-end="}">
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#ac7c23dadd8ddb09ff2cb6617f829f3ea">  127</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#ac7c23dadd8ddb09ff2cb6617f829f3ea">start</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keywordtype">bool</span> settable, <span class="keywordtype">bool</span> encrypted,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>             <a class="code hl_class" href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.html">TinyCTSPeripheralHandler</a>* handler, std::string&amp; error)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    _handler = handler;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    _name = name;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    _settable = settable;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    _encrypted = encrypted;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    _error.clear();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    _adapter = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a53b249b4e6cbf3225ac904a0e5899e9a">TinyCTSBlueZ::findAdapter</a>(_adapterName, _error);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    GDBusConnection* conn = _adapter.empty() ? nullptr : <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a9cc71d652da41fdafa69454094995f87">TinyCTSBlueZ::bus</a>(_error);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">if</span> (conn == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>      error = _error;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    _nodeInfo = g_dbus_node_info_new_for_xml(xml(), <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    _chars[0] = {std::string(Service) + <span class="stringliteral">&quot;/char0&quot;</span>, <a class="code hl_variable" href="_tiny_c_t_s_types_8h.html#a1aa584cffa4c75376698a2a0b4eefc54">CTS_CURRENT_TIME_UUID</a>, <span class="keyword">true</span>};</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    _chars[1] = {std::string(Service) + <span class="stringliteral">&quot;/char1&quot;</span>, <a class="code hl_variable" href="_tiny_c_t_s_types_8h.html#a705735394a5ae9330d6f8d9e307cfa92">CTS_LOCAL_TIME_INFO_UUID</a>, <span class="keyword">false</span>};</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    _chars[2] = {std::string(Service) + <span class="stringliteral">&quot;/char2&quot;</span>, <a class="code hl_variable" href="_tiny_c_t_s_types_8h.html#a3ce5c3a68c37b6cd9eb8951f4b71b371">CTS_REFERENCE_TIME_INFO_UUID</a>, <span class="keyword">false</span>};</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordflow">if</span> (!exportObject(App, <span class="stringliteral">&quot;org.freedesktop.DBus.ObjectManager&quot;</span>) ||</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        !exportObject(Service, <span class="stringliteral">&quot;org.bluez.GattService1&quot;</span>) ||</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        !exportObject(_chars[0].path.c_str(), <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>) ||</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        !exportObject(_chars[1].path.c_str(), <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>) ||</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        !exportObject(_chars[2].path.c_str(), <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>) ||</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        !exportObject(Advertisement, <span class="stringliteral">&quot;org.bluez.LEAdvertisement1&quot;</span>)) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>      error = _error;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>      <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a826e3be3371325b1f04b0b669e93d0d8">stop</a>();</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    _started = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="comment">// BlueZ calls back while it registers: the main loop has to run</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    _pending = 2;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    g_dbus_connection_call(conn, <span class="stringliteral">&quot;org.bluez&quot;</span>, _adapter.c_str(), <span class="stringliteral">&quot;org.bluez.GattManager1&quot;</span>,</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                           <span class="stringliteral">&quot;RegisterApplication&quot;</span>, g_variant_new_parsed(<span class="stringliteral">&quot;(%o, @a{sv} {})&quot;</span>, App),</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                           <span class="keyword">nullptr</span>, G_DBUS_CALL_FLAGS_NONE, 20000, <span class="keyword">nullptr</span>, onRegistered, <span class="keyword">this</span>);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    g_dbus_connection_call(conn, <span class="stringliteral">&quot;org.bluez&quot;</span>, _adapter.c_str(),</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                           <span class="stringliteral">&quot;org.bluez.LEAdvertisingManager1&quot;</span>, <span class="stringliteral">&quot;RegisterAdvertisement&quot;</span>,</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                           g_variant_new_parsed(<span class="stringliteral">&quot;(%o, @a{sv} {})&quot;</span>, Advertisement), <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                           G_DBUS_CALL_FLAGS_NONE, 20000, <span class="keyword">nullptr</span>, onRegistered, <span class="keyword">this</span>);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4000 &amp;&amp; _pending &gt; 0; i++) {  <span class="comment">// up to 20 s</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>      <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a423b1e5966cb151093ac65ae90e20af6">process</a>();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>      g_usleep(5 * 1000);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordflow">if</span> (_pending &gt; 0 &amp;&amp; _error.empty()) _error = <span class="stringliteral">&quot;BlueZ does not answer&quot;</span>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordflow">if</span> (!_error.empty()) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>      error = _error;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>      <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a826e3be3371325b1f04b0b669e93d0d8">stop</a>();</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    _registered = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  }</div>
 </div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="foldopen" id="foldopen00182" data-start="{" data-end="}">
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#abd1d1426289f484ef463ab57c45930ba">  182</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#abd1d1426289f484ef463ab57c45930ba">process</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordflow">while</span> (g_main_context_iteration(<span class="keyword">nullptr</span>, FALSE)) {</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="foldopen" id="foldopen00180" data-start="{" data-end="}">
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a423b1e5966cb151093ac65ae90e20af6">  180</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a423b1e5966cb151093ac65ae90e20af6">process</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">while</span> (g_main_context_iteration(<span class="keyword">nullptr</span>, FALSE)) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  }</div>
 </div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="foldopen" id="foldopen00187" data-start="{" data-end="}">
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#ace4c8bef884b9fa33591d53daefbf63b">  187</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#ace4c8bef884b9fa33591d53daefbf63b">notify</a>(uint16_t uuid, <span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; value)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordflow">if</span> (!_notifying) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> Chr&amp; c : _chars) {</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>      <span class="keywordflow">if</span> (c.uuid == uuid) emitValue(c, value);</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    }</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="foldopen" id="foldopen00185" data-start="{" data-end="}">
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a98b73205c20008409aaaf3f5e2d3639e">  185</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a98b73205c20008409aaaf3f5e2d3639e">notify</a>(uint16_t uuid, <span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; value)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="keywordflow">if</span> (!_notifying) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> Chr&amp; c : _chars) {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      <span class="keywordflow">if</span> (c.uuid == uuid) emitValue(c, value);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  }</div>
 </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
-<div class="foldopen" id="foldopen00194" data-start="{" data-end="}">
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a50c3228d56c4c7d0ea530114d709eb98">  194</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a50c3228d56c4c7d0ea530114d709eb98">stop</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    std::string ignored;</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">if</span> (_registered) {</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#ae806d708b7db6c5b572e88bb78ff4d24">bluez::call</a>(_adapter, <span class="stringliteral">&quot;org.bluez.GattManager1&quot;</span>, <span class="stringliteral">&quot;UnregisterApplication&quot;</span>,</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                  g_variant_new(<span class="stringliteral">&quot;(o)&quot;</span>, App), ignored, 2000);</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#ae806d708b7db6c5b572e88bb78ff4d24">bluez::call</a>(_adapter, <span class="stringliteral">&quot;org.bluez.LEAdvertisingManager1&quot;</span>, <span class="stringliteral">&quot;UnregisterAdvertisement&quot;</span>,</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>                  g_variant_new(<span class="stringliteral">&quot;(o)&quot;</span>, Advertisement), ignored, 2000);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>      _registered = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    }</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    GDBusConnection* conn = <a class="code hl_function" href="_tiny_c_t_s_blue_z_8h.html#ab082607f8a39590c45d832ce96f39af4">bluez::bus</a>(ignored);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordflow">for</span> (guint <span class="keywordtype">id</span> : _ids) {</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      <span class="keywordflow">if</span> (conn != <span class="keyword">nullptr</span>) g_dbus_connection_unregister_object(conn, <span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    }</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    _ids.clear();</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">if</span> (_nodeInfo != <span class="keyword">nullptr</span>) g_dbus_node_info_unref(_nodeInfo);</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    _nodeInfo = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    _started = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    _notifying = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="foldopen" id="foldopen00192" data-start="{" data-end="}">
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a826e3be3371325b1f04b0b669e93d0d8">  192</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a826e3be3371325b1f04b0b669e93d0d8">stop</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    std::string ignored;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">if</span> (_registered) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>      <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#af3090d03a85d2c0a8f73ead32d0abcf1">TinyCTSBlueZ::call</a>(_adapter, <span class="stringliteral">&quot;org.bluez.GattManager1&quot;</span>, <span class="stringliteral">&quot;UnregisterApplication&quot;</span>,</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                  g_variant_new(<span class="stringliteral">&quot;(o)&quot;</span>, App), ignored, 2000);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#af3090d03a85d2c0a8f73ead32d0abcf1">TinyCTSBlueZ::call</a>(_adapter, <span class="stringliteral">&quot;org.bluez.LEAdvertisingManager1&quot;</span>, <span class="stringliteral">&quot;UnregisterAdvertisement&quot;</span>,</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                  g_variant_new(<span class="stringliteral">&quot;(o)&quot;</span>, Advertisement), ignored, 2000);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      _registered = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    GDBusConnection* conn = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a9cc71d652da41fdafa69454094995f87">TinyCTSBlueZ::bus</a>(ignored);</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">for</span> (guint <span class="keywordtype">id</span> : _ids) {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      <span class="keywordflow">if</span> (conn != <span class="keyword">nullptr</span>) g_dbus_connection_unregister_object(conn, <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    _ids.clear();</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">if</span> (_nodeInfo != <span class="keyword">nullptr</span>) g_dbus_node_info_unref(_nodeInfo);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    _nodeInfo = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    _started = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    _notifying = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  }</div>
 </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* App = <span class="stringliteral">&quot;/org/tinycts&quot;</span>;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* Service = <span class="stringliteral">&quot;/org/tinycts/service0&quot;</span>;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* Advertisement = <span class="stringliteral">&quot;/org/tinycts/adv0&quot;</span>;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  <span class="keyword">struct </span>Chr {</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    std::string path;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    uint16_t uuid = 0;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordtype">bool</span> current = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  };</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* xml() {</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;node&gt;&quot;</span></div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>           <span class="stringliteral">&quot; &lt;interface name=&#39;org.freedesktop.DBus.ObjectManager&#39;&gt;&quot;</span></div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;GetManagedObjects&#39;&gt;&quot;</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;a{oa{sa{sv}}}&#39; name=&#39;objects&#39; direction=&#39;out&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>           <span class="stringliteral">&quot;  &lt;/method&gt;&quot;</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>           <span class="stringliteral">&quot; &lt;/interface&gt;&quot;</span></div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>           <span class="stringliteral">&quot; &lt;interface name=&#39;org.bluez.GattService1&#39;&gt;&quot;</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;UUID&#39; type=&#39;s&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Primary&#39; type=&#39;b&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>           <span class="stringliteral">&quot; &lt;/interface&gt;&quot;</span></div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>           <span class="stringliteral">&quot; &lt;interface name=&#39;org.bluez.GattCharacteristic1&#39;&gt;&quot;</span></div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;ReadValue&#39;&gt;&quot;</span></div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;a{sv}&#39; name=&#39;options&#39; direction=&#39;in&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;ay&#39; name=&#39;value&#39; direction=&#39;out&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>           <span class="stringliteral">&quot;  &lt;/method&gt;&quot;</span></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;WriteValue&#39;&gt;&quot;</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;ay&#39; name=&#39;value&#39; direction=&#39;in&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;a{sv}&#39; name=&#39;options&#39; direction=&#39;in&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>           <span class="stringliteral">&quot;  &lt;/method&gt;&quot;</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;StartNotify&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;StopNotify&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;UUID&#39; type=&#39;s&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Service&#39; type=&#39;o&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Flags&#39; type=&#39;as&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Notifying&#39; type=&#39;b&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>           <span class="stringliteral">&quot; &lt;/interface&gt;&quot;</span></div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>           <span class="stringliteral">&quot; &lt;interface name=&#39;org.bluez.LEAdvertisement1&#39;&gt;&quot;</span></div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;Release&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Type&#39; type=&#39;s&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;ServiceUUIDs&#39; type=&#39;as&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;LocalName&#39; type=&#39;s&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>           <span class="stringliteral">&quot; &lt;/interface&gt;&quot;</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>           <span class="stringliteral">&quot;&lt;/node&gt;&quot;</span>;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  }</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  <span class="keywordtype">bool</span> exportObject(<span class="keyword">const</span> <span class="keywordtype">char</span>* path, <span class="keyword">const</span> <span class="keywordtype">char</span>* iface) {</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keyword">static</span> <span class="keyword">const</span> GDBusInterfaceVTable vtable = {onCall, onGet, <span class="keyword">nullptr</span>, {}};</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    GError* err = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    GDBusConnection* conn = bluez::bus(_error);</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    GDBusInterfaceInfo* info = g_dbus_node_info_lookup_interface(_nodeInfo, iface);</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    guint <span class="keywordtype">id</span> = conn == <span class="keyword">nullptr</span> ? 0</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                               : g_dbus_connection_register_object(conn, path, info, &amp;vtable,</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                                                                   <span class="keyword">this</span>, <span class="keyword">nullptr</span>, &amp;err);</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 0) {</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>      <span class="keywordflow">if</span> (err != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        _error = std::string(<span class="stringliteral">&quot;cannot export &quot;</span>) + path + <span class="stringliteral">&quot;: &quot;</span> + err-&gt;message;</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        g_error_free(err);</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>      }</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    }</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    _ids.push_back(<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  }</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> onRegistered(GObject* source, GAsyncResult* res, gpointer self) {</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    BlueZPeripheral* s = <span class="keyword">static_cast&lt;</span>BlueZPeripheral*<span class="keyword">&gt;</span>(self);</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    GError* err = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    GVariant* r = g_dbus_connection_call_finish(G_DBUS_CONNECTION(source), res, &amp;err);</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    s-&gt;_pending--;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordflow">if</span> (r == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>      g_dbus_error_strip_remote_error(err);</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      s-&gt;_error = std::string(<span class="stringliteral">&quot;BlueZ refused the registration: &quot;</span>) + err-&gt;message;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      g_error_free(err);</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    }</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    g_variant_unref(r);</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  }</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <span class="keyword">const</span> Chr* find(<span class="keyword">const</span> <span class="keywordtype">char</span>* path)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> Chr&amp; c : _chars) {</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      <span class="keywordflow">if</span> (c.path == path) <span class="keywordflow">return</span> &amp;c;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    }</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  }</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  <span class="keyword">static</span> GVariant* bytes(<span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; v) {</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keywordflow">return</span> g_variant_new_fixed_array(G_VARIANT_TYPE_BYTE, v.data(), v.size(), 1);</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  }</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  GVariant* flags(<span class="keyword">const</span> Chr&amp; c)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    GVariantBuilder b;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    g_variant_builder_init(&amp;b, G_VARIANT_TYPE(<span class="stringliteral">&quot;as&quot;</span>));</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    g_variant_builder_add(&amp;b, <span class="stringliteral">&quot;s&quot;</span>, <span class="stringliteral">&quot;read&quot;</span>);</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keywordflow">if</span> (c.current) g_variant_builder_add(&amp;b, <span class="stringliteral">&quot;s&quot;</span>, <span class="stringliteral">&quot;notify&quot;</span>);</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="keywordflow">if</span> (_settable &amp;&amp; c.uuid != CTS_REFERENCE_TIME_INFO_UUID) {</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>      g_variant_builder_add(&amp;b, <span class="stringliteral">&quot;s&quot;</span>, _encrypted ? <span class="stringliteral">&quot;encrypt-write&quot;</span> : <span class="stringliteral">&quot;write&quot;</span>);</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    }</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordflow">return</span> g_variant_builder_end(&amp;b);</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  }</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  GVariant* managed() {</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    GVariantBuilder objects;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    g_variant_builder_init(&amp;objects, G_VARIANT_TYPE(<span class="stringliteral">&quot;a{oa{sa{sv}}}&quot;</span>));</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    GVariant* service = g_variant_new_parsed(</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="stringliteral">&quot;{&#39;org.bluez.GattService1&#39;: {&#39;UUID&#39;: &lt;%s&gt;, &#39;Primary&#39;: &lt;true&gt;}}&quot;</span>,</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        bluez::fullUuid(CTS_SERVICE_UUID).c_str());</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    g_variant_builder_add(&amp;objects, <span class="stringliteral">&quot;{o@a{sa{sv}}}&quot;</span>, Service, service);</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> Chr&amp; c : _chars) {</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      GVariantBuilder props;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>      g_variant_builder_init(&amp;props, G_VARIANT_TYPE(<span class="stringliteral">&quot;a{sv}&quot;</span>));</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>      g_variant_builder_add(&amp;props, <span class="stringliteral">&quot;{sv}&quot;</span>, <span class="stringliteral">&quot;UUID&quot;</span>,</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                            g_variant_new_string(bluez::fullUuid(c.uuid).c_str()));</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>      g_variant_builder_add(&amp;props, <span class="stringliteral">&quot;{sv}&quot;</span>, <span class="stringliteral">&quot;Service&quot;</span>, g_variant_new_object_path(Service));</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>      g_variant_builder_add(&amp;props, <span class="stringliteral">&quot;{sv}&quot;</span>, <span class="stringliteral">&quot;Flags&quot;</span>, flags(c));</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>      GVariantBuilder ifaces;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>      g_variant_builder_init(&amp;ifaces, G_VARIANT_TYPE(<span class="stringliteral">&quot;a{sa{sv}}&quot;</span>));</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>      g_variant_builder_add(&amp;ifaces, <span class="stringliteral">&quot;{sa{sv}}&quot;</span>, <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>, &amp;props);</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>      g_variant_builder_add(&amp;objects, <span class="stringliteral">&quot;{oa{sa{sv}}}&quot;</span>, c.path.c_str(), &amp;ifaces);</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    }</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    <span class="keywordflow">return</span> g_variant_new(<span class="stringliteral">&quot;(a{oa{sa{sv}}})&quot;</span>, &amp;objects);</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  }</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  <span class="keywordtype">void</span> emitValue(<span class="keyword">const</span> Chr&amp; c, <span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; value) {</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    std::string ignored;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    GDBusConnection* conn = bluez::bus(ignored);</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    <span class="keywordflow">if</span> (conn == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    GVariantBuilder changed;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    g_variant_builder_init(&amp;changed, G_VARIANT_TYPE(<span class="stringliteral">&quot;a{sv}&quot;</span>));</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    g_variant_builder_add(&amp;changed, <span class="stringliteral">&quot;{sv}&quot;</span>, <span class="stringliteral">&quot;Value&quot;</span>, bytes(value));</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    g_dbus_connection_emit_signal(</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        conn, <span class="keyword">nullptr</span>, c.path.c_str(), <span class="stringliteral">&quot;org.freedesktop.DBus.Properties&quot;</span>, <span class="stringliteral">&quot;PropertiesChanged&quot;</span>,</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        g_variant_new(<span class="stringliteral">&quot;(sa{sv}as)&quot;</span>, <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>, &amp;changed, <span class="keyword">nullptr</span>),</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  }</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> onCall(GDBusConnection*, <span class="keyword">const</span> gchar*, <span class="keyword">const</span> gchar* path, <span class="keyword">const</span> gchar*,</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>                     <span class="keyword">const</span> gchar* method, GVariant* params, GDBusMethodInvocation* inv,</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>                     gpointer self) {</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    BlueZPeripheral* s = <span class="keyword">static_cast&lt;</span>BlueZPeripheral*<span class="keyword">&gt;</span>(self);</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;GetManagedObjects&quot;</span>)) {</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>      g_dbus_method_invocation_return_value(inv, s-&gt;managed());</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;ReadValue&quot;</span>)) {</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>      <span class="keyword">const</span> Chr* c = s-&gt;find(path);</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>      std::vector&lt;uint8_t&gt; value;</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>      <span class="keywordflow">if</span> (c == <span class="keyword">nullptr</span> || s-&gt;_handler == <span class="keyword">nullptr</span> || !s-&gt;_handler-&gt;onRead(c-&gt;uuid, value)) {</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        g_dbus_method_invocation_return_dbus_error(inv, <span class="stringliteral">&quot;org.bluez.Error.Failed&quot;</span>, <span class="stringliteral">&quot;unknown&quot;</span>);</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>      }</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>      g_dbus_method_invocation_return_value(inv, g_variant_new(<span class="stringliteral">&quot;(@ay)&quot;</span>, bytes(value)));</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;WriteValue&quot;</span>)) {</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      <span class="keyword">const</span> Chr* c = s-&gt;find(path);</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>      GVariant* data;</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>      GVariant* options;</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>      g_variant_get(params, <span class="stringliteral">&quot;(@ay@a{sv})&quot;</span>, &amp;data, &amp;options);</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>      gsize n;</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>      <span class="keyword">const</span> uint8_t* d = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>uint8_t*<span class="keyword">&gt;</span>(g_variant_get_fixed_array(data, &amp;n, 1));</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>      <span class="keywordtype">bool</span> ok = c != <span class="keyword">nullptr</span> &amp;&amp; s-&gt;_handler != <span class="keyword">nullptr</span> &amp;&amp; s-&gt;_handler-&gt;onWrite(c-&gt;uuid, d, n);</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>      g_variant_unref(data);</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>      g_variant_unref(options);</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>      <span class="keywordflow">if</span> (ok) {</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        g_dbus_method_invocation_return_value(inv, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        g_dbus_method_invocation_return_dbus_error(inv, <span class="stringliteral">&quot;org.bluez.Error.NotPermitted&quot;</span>,</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>                                                   <span class="stringliteral">&quot;the time cannot be set&quot;</span>);</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>      }</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;StartNotify&quot;</span>)) {</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>      s-&gt;_notifying = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>      g_dbus_method_invocation_return_value(inv, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;StopNotify&quot;</span>)) {</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>      s-&gt;_notifying = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* App = <span class="stringliteral">&quot;/org/tinycts&quot;</span>;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* Service = <span class="stringliteral">&quot;/org/tinycts/service0&quot;</span>;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* Advertisement = <span class="stringliteral">&quot;/org/tinycts/adv0&quot;</span>;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  <span class="keyword">struct </span>Chr {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    std::string path;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    uint16_t uuid = 0;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordtype">bool</span> current = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  };</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* xml() {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;node&gt;&quot;</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>           <span class="stringliteral">&quot; &lt;interface name=&#39;org.freedesktop.DBus.ObjectManager&#39;&gt;&quot;</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;GetManagedObjects&#39;&gt;&quot;</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;a{oa{sa{sv}}}&#39; name=&#39;objects&#39; direction=&#39;out&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>           <span class="stringliteral">&quot;  &lt;/method&gt;&quot;</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>           <span class="stringliteral">&quot; &lt;/interface&gt;&quot;</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>           <span class="stringliteral">&quot; &lt;interface name=&#39;org.bluez.GattService1&#39;&gt;&quot;</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;UUID&#39; type=&#39;s&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Primary&#39; type=&#39;b&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>           <span class="stringliteral">&quot; &lt;/interface&gt;&quot;</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>           <span class="stringliteral">&quot; &lt;interface name=&#39;org.bluez.GattCharacteristic1&#39;&gt;&quot;</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;ReadValue&#39;&gt;&quot;</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;a{sv}&#39; name=&#39;options&#39; direction=&#39;in&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;ay&#39; name=&#39;value&#39; direction=&#39;out&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>           <span class="stringliteral">&quot;  &lt;/method&gt;&quot;</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;WriteValue&#39;&gt;&quot;</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;ay&#39; name=&#39;value&#39; direction=&#39;in&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>           <span class="stringliteral">&quot;   &lt;arg type=&#39;a{sv}&#39; name=&#39;options&#39; direction=&#39;in&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>           <span class="stringliteral">&quot;  &lt;/method&gt;&quot;</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;StartNotify&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;StopNotify&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;UUID&#39; type=&#39;s&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Service&#39; type=&#39;o&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Flags&#39; type=&#39;as&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Notifying&#39; type=&#39;b&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>           <span class="stringliteral">&quot; &lt;/interface&gt;&quot;</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>           <span class="stringliteral">&quot; &lt;interface name=&#39;org.bluez.LEAdvertisement1&#39;&gt;&quot;</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>           <span class="stringliteral">&quot;  &lt;method name=&#39;Release&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;Type&#39; type=&#39;s&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;ServiceUUIDs&#39; type=&#39;as&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>           <span class="stringliteral">&quot;  &lt;property name=&#39;LocalName&#39; type=&#39;s&#39; access=&#39;read&#39;/&gt;&quot;</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>           <span class="stringliteral">&quot; &lt;/interface&gt;&quot;</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>           <span class="stringliteral">&quot;&lt;/node&gt;&quot;</span>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  }</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  <span class="keywordtype">bool</span> exportObject(<span class="keyword">const</span> <span class="keywordtype">char</span>* path, <span class="keyword">const</span> <span class="keywordtype">char</span>* iface) {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keyword">static</span> <span class="keyword">const</span> GDBusInterfaceVTable vtable = {onCall, onGet, <span class="keyword">nullptr</span>, {}};</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    GError* err = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    GDBusConnection* conn = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a9cc71d652da41fdafa69454094995f87">TinyCTSBlueZ::bus</a>(_error);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    GDBusInterfaceInfo* info = g_dbus_node_info_lookup_interface(_nodeInfo, iface);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    guint <span class="keywordtype">id</span> = conn == <span class="keyword">nullptr</span> ? 0</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                               : g_dbus_connection_register_object(conn, path, info, &amp;vtable,</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                                                                   <span class="keyword">this</span>, <span class="keyword">nullptr</span>, &amp;err);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 0) {</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      <span class="keywordflow">if</span> (err != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        _error = std::string(<span class="stringliteral">&quot;cannot export &quot;</span>) + path + <span class="stringliteral">&quot;: &quot;</span> + err-&gt;message;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        g_error_free(err);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      }</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    }</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    _ids.push_back(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  }</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> onRegistered(GObject* source, GAsyncResult* res, gpointer self) {</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    TinyCTSBlueZPeripheral* s = <span class="keyword">static_cast&lt;</span>TinyCTSBlueZPeripheral*<span class="keyword">&gt;</span>(self);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    GError* err = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    GVariant* r = g_dbus_connection_call_finish(G_DBUS_CONNECTION(source), res, &amp;err);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    s-&gt;_pending--;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="keywordflow">if</span> (r == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      g_dbus_error_strip_remote_error(err);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>      s-&gt;_error = std::string(<span class="stringliteral">&quot;BlueZ refused the registration: &quot;</span>) + err-&gt;message;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>      g_error_free(err);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    }</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    g_variant_unref(r);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  }</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  <span class="keyword">const</span> Chr* find(<span class="keyword">const</span> <span class="keywordtype">char</span>* path)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> Chr&amp; c : _chars) {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      <span class="keywordflow">if</span> (c.path == path) <span class="keywordflow">return</span> &amp;c;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    }</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  }</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  <span class="keyword">static</span> GVariant* bytes(<span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; v) {</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordflow">return</span> g_variant_new_fixed_array(G_VARIANT_TYPE_BYTE, v.data(), v.size(), 1);</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  }</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  GVariant* flags(<span class="keyword">const</span> Chr&amp; c)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    GVariantBuilder b;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    g_variant_builder_init(&amp;b, G_VARIANT_TYPE(<span class="stringliteral">&quot;as&quot;</span>));</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    g_variant_builder_add(&amp;b, <span class="stringliteral">&quot;s&quot;</span>, <span class="stringliteral">&quot;read&quot;</span>);</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="keywordflow">if</span> (c.current) g_variant_builder_add(&amp;b, <span class="stringliteral">&quot;s&quot;</span>, <span class="stringliteral">&quot;notify&quot;</span>);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">if</span> (_settable &amp;&amp; c.uuid != CTS_REFERENCE_TIME_INFO_UUID) {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      g_variant_builder_add(&amp;b, <span class="stringliteral">&quot;s&quot;</span>, _encrypted ? <span class="stringliteral">&quot;encrypt-write&quot;</span> : <span class="stringliteral">&quot;write&quot;</span>);</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    }</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    <span class="keywordflow">return</span> g_variant_builder_end(&amp;b);</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  }</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  GVariant* managed() {</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    GVariantBuilder objects;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    g_variant_builder_init(&amp;objects, G_VARIANT_TYPE(<span class="stringliteral">&quot;a{oa{sa{sv}}}&quot;</span>));</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    GVariant* service = g_variant_new_parsed(</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <span class="stringliteral">&quot;{&#39;org.bluez.GattService1&#39;: {&#39;UUID&#39;: &lt;%s&gt;, &#39;Primary&#39;: &lt;true&gt;}}&quot;</span>,</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aa8e3aed67b5301ee95fd8bb75f68e155">TinyCTSBlueZ::fullUuid</a>(CTS_SERVICE_UUID).c_str());</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    g_variant_builder_add(&amp;objects, <span class="stringliteral">&quot;{o@a{sa{sv}}}&quot;</span>, Service, service);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> Chr&amp; c : _chars) {</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      GVariantBuilder props;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>      g_variant_builder_init(&amp;props, G_VARIANT_TYPE(<span class="stringliteral">&quot;a{sv}&quot;</span>));</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>      g_variant_builder_add(&amp;props, <span class="stringliteral">&quot;{sv}&quot;</span>, <span class="stringliteral">&quot;UUID&quot;</span>,</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                            g_variant_new_string(<a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aa8e3aed67b5301ee95fd8bb75f68e155">TinyCTSBlueZ::fullUuid</a>(c.uuid).c_str()));</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>      g_variant_builder_add(&amp;props, <span class="stringliteral">&quot;{sv}&quot;</span>, <span class="stringliteral">&quot;Service&quot;</span>, g_variant_new_object_path(Service));</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>      g_variant_builder_add(&amp;props, <span class="stringliteral">&quot;{sv}&quot;</span>, <span class="stringliteral">&quot;Flags&quot;</span>, flags(c));</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>      GVariantBuilder ifaces;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>      g_variant_builder_init(&amp;ifaces, G_VARIANT_TYPE(<span class="stringliteral">&quot;a{sa{sv}}&quot;</span>));</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>      g_variant_builder_add(&amp;ifaces, <span class="stringliteral">&quot;{sa{sv}}&quot;</span>, <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>, &amp;props);</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>      g_variant_builder_add(&amp;objects, <span class="stringliteral">&quot;{oa{sa{sv}}}&quot;</span>, c.path.c_str(), &amp;ifaces);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    }</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordflow">return</span> g_variant_new(<span class="stringliteral">&quot;(a{oa{sa{sv}}})&quot;</span>, &amp;objects);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  }</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  <span class="keywordtype">void</span> emitValue(<span class="keyword">const</span> Chr&amp; c, <span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; value) {</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    std::string ignored;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    GDBusConnection* conn = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a9cc71d652da41fdafa69454094995f87">TinyCTSBlueZ::bus</a>(ignored);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keywordflow">if</span> (conn == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    GVariantBuilder changed;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    g_variant_builder_init(&amp;changed, G_VARIANT_TYPE(<span class="stringliteral">&quot;a{sv}&quot;</span>));</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    g_variant_builder_add(&amp;changed, <span class="stringliteral">&quot;{sv}&quot;</span>, <span class="stringliteral">&quot;Value&quot;</span>, bytes(value));</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    g_dbus_connection_emit_signal(</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        conn, <span class="keyword">nullptr</span>, c.path.c_str(), <span class="stringliteral">&quot;org.freedesktop.DBus.Properties&quot;</span>, <span class="stringliteral">&quot;PropertiesChanged&quot;</span>,</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        g_variant_new(<span class="stringliteral">&quot;(sa{sv}as)&quot;</span>, <span class="stringliteral">&quot;org.bluez.GattCharacteristic1&quot;</span>, &amp;changed, <span class="keyword">nullptr</span>),</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>  }</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> onCall(GDBusConnection*, <span class="keyword">const</span> gchar*, <span class="keyword">const</span> gchar* path, <span class="keyword">const</span> gchar*,</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>                     <span class="keyword">const</span> gchar* method, GVariant* params, GDBusMethodInvocation* inv,</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>                     gpointer self) {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    TinyCTSBlueZPeripheral* s = <span class="keyword">static_cast&lt;</span>TinyCTSBlueZPeripheral*<span class="keyword">&gt;</span>(self);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;GetManagedObjects&quot;</span>)) {</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>      g_dbus_method_invocation_return_value(inv, s-&gt;managed());</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;ReadValue&quot;</span>)) {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>      <span class="keyword">const</span> Chr* c = s-&gt;find(path);</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>      std::vector&lt;uint8_t&gt; value;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>      <span class="keywordflow">if</span> (c == <span class="keyword">nullptr</span> || s-&gt;_handler == <span class="keyword">nullptr</span> || !s-&gt;_handler-&gt;onRead(c-&gt;uuid, value)) {</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        g_dbus_method_invocation_return_dbus_error(inv, <span class="stringliteral">&quot;org.bluez.Error.Failed&quot;</span>, <span class="stringliteral">&quot;unknown&quot;</span>);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>      }</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>      g_dbus_method_invocation_return_value(inv, g_variant_new(<span class="stringliteral">&quot;(@ay)&quot;</span>, bytes(value)));</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;WriteValue&quot;</span>)) {</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>      <span class="keyword">const</span> Chr* c = s-&gt;find(path);</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>      GVariant* data;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      GVariant* options;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>      g_variant_get(params, <span class="stringliteral">&quot;(@ay@a{sv})&quot;</span>, &amp;data, &amp;options);</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>      gsize n;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>      <span class="keyword">const</span> uint8_t* d = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>uint8_t*<span class="keyword">&gt;</span>(g_variant_get_fixed_array(data, &amp;n, 1));</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>      <span class="keywordtype">bool</span> ok = c != <span class="keyword">nullptr</span> &amp;&amp; s-&gt;_handler != <span class="keyword">nullptr</span> &amp;&amp; s-&gt;_handler-&gt;onWrite(c-&gt;uuid, d, n);</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>      g_variant_unref(data);</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>      g_variant_unref(options);</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>      <span class="keywordflow">if</span> (ok) {</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        g_dbus_method_invocation_return_value(inv, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        g_dbus_method_invocation_return_dbus_error(inv, <span class="stringliteral">&quot;org.bluez.Error.NotPermitted&quot;</span>,</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>                                                   <span class="stringliteral">&quot;the time cannot be set&quot;</span>);</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      }</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;StartNotify&quot;</span>)) {</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>      s-&gt;_notifying = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>      g_dbus_method_invocation_return_value(inv, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(method, <span class="stringliteral">&quot;StopNotify&quot;</span>)) {</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>      s-&gt;_notifying = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>      g_dbus_method_invocation_return_value(inv, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    } <span class="keywordflow">else</span> {  <span class="comment">// Release</span></div>
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>      g_dbus_method_invocation_return_value(inv, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    } <span class="keywordflow">else</span> {  <span class="comment">// Release</span></div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>      g_dbus_method_invocation_return_value(inv, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    }</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>  }</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  <span class="keyword">static</span> GVariant* onGet(GDBusConnection*, <span class="keyword">const</span> gchar*, <span class="keyword">const</span> gchar* path, <span class="keyword">const</span> gchar* iface,</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>                         <span class="keyword">const</span> gchar* prop, GError**, gpointer self) {</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    BlueZPeripheral* s = <span class="keyword">static_cast&lt;</span>BlueZPeripheral*<span class="keyword">&gt;</span>(self);</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    <span class="keywordflow">if</span> (!strcmp(iface, <span class="stringliteral">&quot;org.bluez.GattService1&quot;</span>)) {</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>      <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;UUID&quot;</span>)) {</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        <span class="keywordflow">return</span> g_variant_new_string(bluez::fullUuid(CTS_SERVICE_UUID).c_str());</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>      }</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>      <span class="keywordflow">return</span> g_variant_new_boolean(TRUE);</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>    }</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    <span class="keywordflow">if</span> (!strcmp(iface, <span class="stringliteral">&quot;org.bluez.LEAdvertisement1&quot;</span>)) {</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>      <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;Type&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_string(<span class="stringliteral">&quot;peripheral&quot;</span>);</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>      <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;LocalName&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_string(s-&gt;_name.c_str());</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>      std::string u = bluez::fullUuid(CTS_SERVICE_UUID);</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>      <span class="keyword">const</span> gchar* uuids[] = {u.c_str(), <span class="keyword">nullptr</span>};</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>      <span class="keywordflow">return</span> g_variant_new_strv(uuids, 1);</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    }</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>    <span class="keyword">const</span> Chr* c = s-&gt;find(path);</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    <span class="keywordflow">if</span> (c == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>    <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;UUID&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_string(bluez::fullUuid(c-&gt;uuid).c_str());</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;Service&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_object_path(Service);</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;Notifying&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_boolean(s-&gt;_notifying);</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    <span class="keywordflow">return</span> s-&gt;flags(*c);</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>  }</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>  std::string _adapterName, _adapter, _name, _error;</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>  PeripheralHandler* _handler = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>  GDBusNodeInfo* _nodeInfo = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>  std::vector&lt;guint&gt; _ids;</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>  Chr _chars[3];</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>  <span class="keywordtype">int</span> _pending = 0;</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>  <span class="keywordtype">bool</span> _settable = <span class="keyword">false</span>, _encrypted = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>  <span class="keywordtype">bool</span> _started = <span class="keyword">false</span>, _registered = <span class="keyword">false</span>, _notifying = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>};</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    }</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  }</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>  <span class="keyword">static</span> GVariant* onGet(GDBusConnection*, <span class="keyword">const</span> gchar*, <span class="keyword">const</span> gchar* path, <span class="keyword">const</span> gchar* iface,</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                         <span class="keyword">const</span> gchar* prop, GError**, gpointer self) {</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    TinyCTSBlueZPeripheral* s = <span class="keyword">static_cast&lt;</span>TinyCTSBlueZPeripheral*<span class="keyword">&gt;</span>(self);</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="keywordflow">if</span> (!strcmp(iface, <span class="stringliteral">&quot;org.bluez.GattService1&quot;</span>)) {</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>      <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;UUID&quot;</span>)) {</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        <span class="keywordflow">return</span> g_variant_new_string(<a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aa8e3aed67b5301ee95fd8bb75f68e155">TinyCTSBlueZ::fullUuid</a>(CTS_SERVICE_UUID).c_str());</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>      }</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>      <span class="keywordflow">return</span> g_variant_new_boolean(TRUE);</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>    }</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>    <span class="keywordflow">if</span> (!strcmp(iface, <span class="stringliteral">&quot;org.bluez.LEAdvertisement1&quot;</span>)) {</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>      <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;Type&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_string(<span class="stringliteral">&quot;peripheral&quot;</span>);</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>      <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;LocalName&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_string(s-&gt;_name.c_str());</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>      std::string u = <a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aa8e3aed67b5301ee95fd8bb75f68e155">TinyCTSBlueZ::fullUuid</a>(CTS_SERVICE_UUID);</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>      <span class="keyword">const</span> gchar* uuids[] = {u.c_str(), <span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>      <span class="keywordflow">return</span> g_variant_new_strv(uuids, 1);</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    }</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    <span class="keyword">const</span> Chr* c = s-&gt;find(path);</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    <span class="keywordflow">if</span> (c == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>    <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;UUID&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_string(<a class="code hl_function" href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aa8e3aed67b5301ee95fd8bb75f68e155">TinyCTSBlueZ::fullUuid</a>(c-&gt;uuid).c_str());</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;Service&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_object_path(Service);</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>    <span class="keywordflow">if</span> (!strcmp(prop, <span class="stringliteral">&quot;Notifying&quot;</span>)) <span class="keywordflow">return</span> g_variant_new_boolean(s-&gt;_notifying);</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    <span class="keywordflow">return</span> s-&gt;flags(*c);</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>  }</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>  std::string _adapterName, _adapter, _name, _error;</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>  TinyCTSPeripheralHandler* _handler = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>  GDBusNodeInfo* _nodeInfo = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>  std::vector&lt;guint&gt; _ids;</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>  Chr _chars[3];</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>  <span class="keywordtype">int</span> _pending = 0;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>  <span class="keywordtype">bool</span> _settable = <span class="keyword">false</span>, _encrypted = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>  <span class="keywordtype">bool</span> _started = <span class="keyword">false</span>, _registered = <span class="keyword">false</span>, _notifying = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>};</div>
 </div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span> </div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>}  <span class="comment">// namespace</span></div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span> </div>
+<div class="foldopen" id="foldopen00424" data-start="{" data-end="}">
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno"><a class="line" href="_tiny_c_t_s_blue_z_backend_8h.html#acb58b8cacf2e7f512f9530248d9b0d51">  424</a></span><span class="keyword">inline</span> std::unique_ptr&lt;TinyCTSCentral&gt; <a class="code hl_function" href="_tiny_c_t_s_blue_z_backend_8h.html#acb58b8cacf2e7f512f9530248d9b0d51">ctsCreateCentral</a>(<span class="keyword">const</span> std::string&amp; adapter) {</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>  <span class="keywordflow">return</span> std::unique_ptr&lt;TinyCTSCentral&gt;(<span class="keyword">new</span> <a class="code hl_class" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html">TinyCTSBlueZCentral</a>(adapter));</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>}</div>
 </div>
 <div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> </div>
 <div class="foldopen" id="foldopen00428" data-start="{" data-end="}">
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno"><a class="line" href="_tiny_c_t_s_blue_z_backend_8h.html#a7d86ab21543f1b38b05b5791f01b714c">  428</a></span><span class="keyword">inline</span> std::unique_ptr&lt;Central&gt; <a class="code hl_function" href="_tiny_c_t_s_blue_z_backend_8h.html#a7d86ab21543f1b38b05b5791f01b714c">createCentral</a>(<span class="keyword">const</span> std::string&amp; adapter) {</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>  <span class="keywordflow">return</span> std::unique_ptr&lt;Central&gt;(<span class="keyword">new</span> BlueZCentral(adapter));</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno"><a class="line" href="_tiny_c_t_s_blue_z_backend_8h.html#a38ec193e45b41570afa0089c11a7772b">  428</a></span><span class="keyword">inline</span> std::unique_ptr&lt;TinyCTSPeripheral&gt; <a class="code hl_function" href="_tiny_c_t_s_blue_z_backend_8h.html#a38ec193e45b41570afa0089c11a7772b">ctsCreatePeripheral</a>(<span class="keyword">const</span> std::string&amp; adapter) {</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>  <span class="keywordflow">return</span> std::unique_ptr&lt;TinyCTSPeripheral&gt;(<span class="keyword">new</span> <a class="code hl_class" href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html">TinyCTSBlueZPeripheral</a>(adapter));</div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>}</div>
 </div>
 <div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
-<div class="foldopen" id="foldopen00432" data-start="{" data-end="}">
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno"><a class="line" href="_tiny_c_t_s_blue_z_backend_8h.html#a08a33aa3e057f12a4e36562058378b0b">  432</a></span><span class="keyword">inline</span> std::unique_ptr&lt;Peripheral&gt; <a class="code hl_function" href="_tiny_c_t_s_blue_z_backend_8h.html#a08a33aa3e057f12a4e36562058378b0b">createPeripheral</a>(<span class="keyword">const</span> std::string&amp; adapter) {</div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>  <span class="keywordflow">return</span> std::unique_ptr&lt;Peripheral&gt;(<span class="keyword">new</span> BlueZPeripheral(adapter));</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>}</div>
-</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span> </div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>}  <span class="comment">// namespace desktop</span></div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>}  <span class="comment">// namespace tiny_cts</span></div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>}  <span class="comment">// namespace tiny_cts</span></div>
 <div class="ttc" id="a_tiny_c_t_s_blue_z_8h_html"><div class="ttname"><a href="_tiny_c_t_s_blue_z_8h.html">TinyCTSBlueZ.h</a></div><div class="ttdoc">The access to BlueZ, the Bluetooth stack of Linux, over D-Bus (GIO): the functions that the BlueZ cli...</div></div>
-<div class="ttc" id="a_tiny_c_t_s_blue_z_8h_html_a0d5cf6b7af589d2bbe9815884ecb09d8"><div class="ttname"><a href="_tiny_c_t_s_blue_z_8h.html#a0d5cf6b7af589d2bbe9815884ecb09d8">tiny_cts::bluez::discover</a></div><div class="ttdeci">std::vector&lt; Device &gt; discover(const std::string &amp;adapter, uint32_t timeoutMs, Found found, std::string &amp;error)</div><div class="ttdoc">Look for devices. The scan stops when found(devices) returns true, or at the timeout.</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:219</div></div>
-<div class="ttc" id="a_tiny_c_t_s_blue_z_8h_html_a3c43d477074a756d1fe1449aff2843ad"><div class="ttname"><a href="_tiny_c_t_s_blue_z_8h.html#a3c43d477074a756d1fe1449aff2843ad">tiny_cts::bluez::findCharacteristic</a></div><div class="ttdeci">std::string findCharacteristic(const std::string &amp;devicePath, uint16_t uuid16)</div><div class="ttdoc">The object path of a characteristic of a connected device (empty if not found).</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:159</div></div>
-<div class="ttc" id="a_tiny_c_t_s_blue_z_8h_html_a736853b7f864f66fc3de84b71862ae16"><div class="ttname"><a href="_tiny_c_t_s_blue_z_8h.html#a736853b7f864f66fc3de84b71862ae16">tiny_cts::bluez::findAdapter</a></div><div class="ttdeci">std::string findAdapter(const std::string &amp;name, std::string &amp;error)</div><div class="ttdoc">The object path of the Bluetooth adapter (empty and the message in error if not found).</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:83</div></div>
-<div class="ttc" id="a_tiny_c_t_s_blue_z_8h_html_ab082607f8a39590c45d832ce96f39af4"><div class="ttname"><a href="_tiny_c_t_s_blue_z_8h.html#ab082607f8a39590c45d832ce96f39af4">tiny_cts::bluez::bus</a></div><div class="ttdeci">GDBusConnection * bus(std::string &amp;error)</div><div class="ttdoc">The connection to the system bus (nullptr and the message in error if not possible).</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:36</div></div>
-<div class="ttc" id="a_tiny_c_t_s_blue_z_8h_html_ae806d708b7db6c5b572e88bb78ff4d24"><div class="ttname"><a href="_tiny_c_t_s_blue_z_8h.html#ae806d708b7db6c5b572e88bb78ff4d24">tiny_cts::bluez::call</a></div><div class="ttdeci">GVariant * call(const std::string &amp;path, const char *iface, const char *method, GVariant *params, std::string &amp;error, int timeoutMs=20000)</div><div class="ttdoc">A synchronous call to BlueZ. Returns nullptr and the message in error.</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:50</div></div>
-<div class="ttc" id="a_tiny_c_t_s_blue_z_backend_8h_html_a08a33aa3e057f12a4e36562058378b0b"><div class="ttname"><a href="_tiny_c_t_s_blue_z_backend_8h.html#a08a33aa3e057f12a4e36562058378b0b">tiny_cts::desktop::createPeripheral</a></div><div class="ttdeci">std::unique_ptr&lt; Peripheral &gt; createPeripheral(const std::string &amp;adapter)</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:432</div></div>
-<div class="ttc" id="a_tiny_c_t_s_blue_z_backend_8h_html_a7d86ab21543f1b38b05b5791f01b714c"><div class="ttname"><a href="_tiny_c_t_s_blue_z_backend_8h.html#a7d86ab21543f1b38b05b5791f01b714c">tiny_cts::desktop::createCentral</a></div><div class="ttdeci">std::unique_ptr&lt; Central &gt; createCentral(const std::string &amp;adapter)</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:428</div></div>
+<div class="ttc" id="a_tiny_c_t_s_blue_z_backend_8h_html_a38ec193e45b41570afa0089c11a7772b"><div class="ttname"><a href="_tiny_c_t_s_blue_z_backend_8h.html#a38ec193e45b41570afa0089c11a7772b">tiny_cts::ctsCreatePeripheral</a></div><div class="ttdeci">std::unique_ptr&lt; TinyCTSPeripheral &gt; ctsCreatePeripheral(const std::string &amp;adapter)</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:428</div></div>
+<div class="ttc" id="a_tiny_c_t_s_blue_z_backend_8h_html_acb58b8cacf2e7f512f9530248d9b0d51"><div class="ttname"><a href="_tiny_c_t_s_blue_z_backend_8h.html#acb58b8cacf2e7f512f9530248d9b0d51">tiny_cts::ctsCreateCentral</a></div><div class="ttdeci">std::unique_ptr&lt; TinyCTSCentral &gt; ctsCreateCentral(const std::string &amp;adapter)</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:424</div></div>
 <div class="ttc" id="a_tiny_c_t_s_desktop_8h_html"><div class="ttname"><a href="_tiny_c_t_s_desktop_8h.html">TinyCTSDesktop.h</a></div><div class="ttdoc">The interface between the desktop classes TinyCTSClient/TinyCTSServer and the Bluetooth stack of the ...</div></div>
 <div class="ttc" id="a_tiny_c_t_s_types_8h_html_a1aa584cffa4c75376698a2a0b4eefc54"><div class="ttname"><a href="_tiny_c_t_s_types_8h.html#a1aa584cffa4c75376698a2a0b4eefc54">tiny_cts::CTS_CURRENT_TIME_UUID</a></div><div class="ttdeci">constexpr uint16_t CTS_CURRENT_TIME_UUID</div><div class="ttdoc">16 bit UUID of the Current Time characteristic (read, notify, write)</div><div class="ttdef"><b>Definition</b> TinyCTSTypes.h:19</div></div>
 <div class="ttc" id="a_tiny_c_t_s_types_8h_html_a3ce5c3a68c37b6cd9eb8951f4b71b371"><div class="ttname"><a href="_tiny_c_t_s_types_8h.html#a3ce5c3a68c37b6cd9eb8951f4b71b371">tiny_cts::CTS_REFERENCE_TIME_INFO_UUID</a></div><div class="ttdeci">constexpr uint16_t CTS_REFERENCE_TIME_INFO_UUID</div><div class="ttdoc">16 bit UUID of the Reference Time Information characteristic (read)</div><div class="ttdef"><b>Definition</b> TinyCTSTypes.h:23</div></div>
 <div class="ttc" id="a_tiny_c_t_s_types_8h_html_a705735394a5ae9330d6f8d9e307cfa92"><div class="ttname"><a href="_tiny_c_t_s_types_8h.html#a705735394a5ae9330d6f8d9e307cfa92">tiny_cts::CTS_LOCAL_TIME_INFO_UUID</a></div><div class="ttdeci">constexpr uint16_t CTS_LOCAL_TIME_INFO_UUID</div><div class="ttdoc">16 bit UUID of the Local Time Information characteristic (read, write)</div><div class="ttdef"><b>Definition</b> TinyCTSTypes.h:21</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1_central_html"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1_central.html">tiny_cts::desktop::Central</a></div><div class="ttdoc">The client side of the operating system (central role).</div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:30</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1_peripheral_handler_html"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1_peripheral_handler.html">tiny_cts::desktop::PeripheralHandler</a></div><div class="ttdoc">The requests of the clients, answered by the server.</div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:58</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1_peripheral_html"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1_peripheral.html">tiny_cts::desktop::Peripheral</a></div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:70</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central_html_a2bb8c3a82f488551d48f6a6c6dc8fd26"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#a2bb8c3a82f488551d48f6a6c6dc8fd26">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZCentral::connect</a></div><div class="ttdeci">bool connect(const std::string &amp;wanted, uint32_t timeoutMs, TinyCTSScanEntry &amp;found, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:32</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central_html_a69eae63a0b38868634f5dc580a892ec8"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#a69eae63a0b38868634f5dc580a892ec8">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZCentral::scan</a></div><div class="ttdeci">bool scan(uint32_t timeoutMs, std::vector&lt; TinyCTSScanEntry &gt; &amp;result, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:21</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central_html_aa8b3c87bee1b62d052be18975366129c"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#aa8b3c87bee1b62d052be18975366129c">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZCentral::read</a></div><div class="ttdeci">bool read(uint16_t uuid, std::vector&lt; uint8_t &gt; &amp;value, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:67</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central_html_ad881e70946b253e99da72c619d1f7dfc"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#ad881e70946b253e99da72c619d1f7dfc">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZCentral::write</a></div><div class="ttdeci">bool write(uint16_t uuid, const uint8_t *data, size_t len, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:76</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central_html_affa348e31d8cf6fcb683faf46576b46a"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_central.html#affa348e31d8cf6fcb683faf46576b46a">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZCentral::disconnect</a></div><div class="ttdeci">void disconnect() override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:85</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral_html_a50c3228d56c4c7d0ea530114d709eb98"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a50c3228d56c4c7d0ea530114d709eb98">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZPeripheral::stop</a></div><div class="ttdeci">void stop() override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:194</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral_html_a5e3be6de2152ee4403547b95d00aafed"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#a5e3be6de2152ee4403547b95d00aafed">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZPeripheral::start</a></div><div class="ttdeci">bool start(const std::string &amp;name, bool settable, bool encrypted, PeripheralHandler *handler, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:129</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral_html_abd1d1426289f484ef463ab57c45930ba"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#abd1d1426289f484ef463ab57c45930ba">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZPeripheral::process</a></div><div class="ttdeci">void process() override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:182</div></div>
-<div class="ttc" id="aclasstiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral_html_ace4c8bef884b9fa33591d53daefbf63b"><div class="ttname"><a href="classtiny__cts_1_1desktop_1_1anonymous__namespace_02_tiny_c_t_s_blue_z_backend_8h_03_1_1_blue_z_peripheral.html#ace4c8bef884b9fa33591d53daefbf63b">tiny_cts::desktop::anonymous_namespace{TinyCTSBlueZBackend.h}::BlueZPeripheral::notify</a></div><div class="ttdeci">void notify(uint16_t uuid, const std::vector&lt; uint8_t &gt; &amp;value) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:187</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_central_html"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html">tiny_cts::TinyCTSBlueZCentral</a></div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:14</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_central_html_a564f80130cb990779ce41c0e5510e7fe"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a564f80130cb990779ce41c0e5510e7fe">tiny_cts::TinyCTSBlueZCentral::write</a></div><div class="ttdeci">bool write(uint16_t uuid, const uint8_t *data, size_t len, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:74</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_central_html_a7e6b6def9c31950a195d381bd8188e45"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#a7e6b6def9c31950a195d381bd8188e45">tiny_cts::TinyCTSBlueZCentral::disconnect</a></div><div class="ttdeci">void disconnect() override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:83</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_central_html_aa516e366c3f19b41855dde7e91d58892"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aa516e366c3f19b41855dde7e91d58892">tiny_cts::TinyCTSBlueZCentral::read</a></div><div class="ttdeci">bool read(uint16_t uuid, std::vector&lt; uint8_t &gt; &amp;value, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:65</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_central_html_aa6a7fc85f78be1263a55800645638b8b"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aa6a7fc85f78be1263a55800645638b8b">tiny_cts::TinyCTSBlueZCentral::connect</a></div><div class="ttdeci">bool connect(const std::string &amp;wanted, uint32_t timeoutMs, TinyCTSScanEntry &amp;found, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:30</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_central_html_aaa313779d8918ed8e2dc0e1e1532b729"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html#aaa313779d8918ed8e2dc0e1e1532b729">tiny_cts::TinyCTSBlueZCentral::scan</a></div><div class="ttdeci">bool scan(uint32_t timeoutMs, std::vector&lt; TinyCTSScanEntry &gt; &amp;result, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:19</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_peripheral_html"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html">tiny_cts::TinyCTSBlueZPeripheral</a></div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:122</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_peripheral_html_a423b1e5966cb151093ac65ae90e20af6"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a423b1e5966cb151093ac65ae90e20af6">tiny_cts::TinyCTSBlueZPeripheral::process</a></div><div class="ttdeci">void process() override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:180</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_peripheral_html_a826e3be3371325b1f04b0b669e93d0d8"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a826e3be3371325b1f04b0b669e93d0d8">tiny_cts::TinyCTSBlueZPeripheral::stop</a></div><div class="ttdeci">void stop() override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:192</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_peripheral_html_a98b73205c20008409aaaf3f5e2d3639e"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#a98b73205c20008409aaaf3f5e2d3639e">tiny_cts::TinyCTSBlueZPeripheral::notify</a></div><div class="ttdeci">void notify(uint16_t uuid, const std::vector&lt; uint8_t &gt; &amp;value) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:185</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_blue_z_peripheral_html_ac7c23dadd8ddb09ff2cb6617f829f3ea"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html#ac7c23dadd8ddb09ff2cb6617f829f3ea">tiny_cts::TinyCTSBlueZPeripheral::start</a></div><div class="ttdeci">bool start(const std::string &amp;name, bool settable, bool encrypted, TinyCTSPeripheralHandler *handler, std::string &amp;error) override</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZBackend.h:127</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_central_html"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a></div><div class="ttdoc">The client side of the operating system (central role).</div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:28</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_peripheral_handler_html"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.html">tiny_cts::TinyCTSPeripheralHandler</a></div><div class="ttdoc">The requests of the clients, answered by the server.</div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:56</div></div>
+<div class="ttc" id="aclasstiny__cts_1_1_tiny_c_t_s_peripheral_html"><div class="ttname"><a href="classtiny__cts_1_1_tiny_c_t_s_peripheral.html">tiny_cts::TinyCTSPeripheral</a></div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:68</div></div>
+<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_blue_z_1_1_device_html"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_blue_z_1_1_device.html">tiny_cts::TinyCTSBlueZ::Device</a></div><div class="ttdoc">A device that BlueZ knows.</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:79</div></div>
+<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_blue_z_html_a53b249b4e6cbf3225ac904a0e5899e9a"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a53b249b4e6cbf3225ac904a0e5899e9a">tiny_cts::TinyCTSBlueZ::findAdapter</a></div><div class="ttdeci">static std::string findAdapter(const std::string &amp;name, std::string &amp;error)</div><div class="ttdoc">The object path of the Bluetooth adapter (empty and the message in error if not found).</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:89</div></div>
+<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_blue_z_html_a87f8da9186b50e34a8a3b0314b8567e2"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a87f8da9186b50e34a8a3b0314b8567e2">tiny_cts::TinyCTSBlueZ::discover</a></div><div class="ttdeci">static std::vector&lt; Device &gt; discover(const std::string &amp;adapter, uint32_t timeoutMs, Found found, std::string &amp;error)</div><div class="ttdoc">Look for devices. The scan stops when found(devices) returns true, or at the timeout.</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:225</div></div>
+<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_blue_z_html_a9cc71d652da41fdafa69454094995f87"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#a9cc71d652da41fdafa69454094995f87">tiny_cts::TinyCTSBlueZ::bus</a></div><div class="ttdeci">static GDBusConnection * bus(std::string &amp;error)</div><div class="ttdoc">The connection to the system bus (nullptr and the message in error if not possible).</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:42</div></div>
+<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_blue_z_html_aa8e3aed67b5301ee95fd8bb75f68e155"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aa8e3aed67b5301ee95fd8bb75f68e155">tiny_cts::TinyCTSBlueZ::fullUuid</a></div><div class="ttdeci">static std::string fullUuid(uint16_t uuid16)</div><div class="ttdoc">The 128 bit UUID of a 16 bit UUID.</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:35</div></div>
+<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_blue_z_html_aefbfceb7f179f834746949832bf0c4c1"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#aefbfceb7f179f834746949832bf0c4c1">tiny_cts::TinyCTSBlueZ::findCharacteristic</a></div><div class="ttdeci">static std::string findCharacteristic(const std::string &amp;devicePath, uint16_t uuid16)</div><div class="ttdoc">The object path of a characteristic of a connected device (empty if not found).</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:165</div></div>
+<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_blue_z_html_af3090d03a85d2c0a8f73ead32d0abcf1"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_blue_z.html#af3090d03a85d2c0a8f73ead32d0abcf1">tiny_cts::TinyCTSBlueZ::call</a></div><div class="ttdeci">static GVariant * call(const std::string &amp;path, const char *iface, const char *method, GVariant *params, std::string &amp;error, int timeoutMs=20000)</div><div class="ttdoc">A synchronous call to BlueZ. Returns nullptr and the message in error.</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:56</div></div>
 <div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_scan_entry_html"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html">tiny_cts::TinyCTSScanEntry</a></div><div class="ttdoc">A device that was found by TinyCTSClient::scan().</div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:18</div></div>
-<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_scan_entry_html_a0a00988f681da04806a715488d5ba0b9"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html#a0a00988f681da04806a715488d5ba0b9">tiny_cts::TinyCTSScanEntry::hasCts</a></div><div class="ttdeci">bool hasCts</div><div class="ttdoc">advertises the Current Time Service</div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:24</div></div>
-<div class="ttc" id="astructtiny__cts_1_1_tiny_c_t_s_scan_entry_html_ab7605ec640214c37b359852b1afd770c"><div class="ttname"><a href="structtiny__cts_1_1_tiny_c_t_s_scan_entry.html#ab7605ec640214c37b359852b1afd770c">tiny_cts::TinyCTSScanEntry::address</a></div><div class="ttdeci">std::string address</div><div class="ttdef"><b>Definition</b> TinyCTSDesktop.h:21</div></div>
-<div class="ttc" id="astructtiny__cts_1_1bluez_1_1_device_html"><div class="ttname"><a href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></div><div class="ttdoc">A device that BlueZ knows.</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:73</div></div>
-<div class="ttc" id="astructtiny__cts_1_1bluez_1_1_device_html_aa721aa50a8e604ae5ae5e6cef9492a4d"><div class="ttname"><a href="structtiny__cts_1_1bluez_1_1_device.html#aa721aa50a8e604ae5ae5e6cef9492a4d">tiny_cts::bluez::Device::cts</a></div><div class="ttdeci">bool cts</div><div class="ttdoc">the UUIDs include the Current Time Service</div><div class="ttdef"><b>Definition</b> TinyCTSBlueZ.h:75</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

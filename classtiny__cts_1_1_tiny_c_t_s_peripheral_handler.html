@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TinyCTS: tiny_cts::desktop::PeripheralHandler Class Reference</title>
+<title>TinyCTS: tiny_cts::TinyCTSPeripheralHandler Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,15 +71,15 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>tiny_cts</b></li><li class="navelem"><b>desktop</b></li><li class="navelem"><a href="classtiny__cts_1_1desktop_1_1_peripheral_handler.html">PeripheralHandler</a></li>  </ul>
+<li class="navelem"><b>tiny_cts</b></li><li class="navelem"><a href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.html">TinyCTSPeripheralHandler</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classtiny__cts_1_1desktop_1_1_peripheral_handler-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">tiny_cts::desktop::PeripheralHandler Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+<a href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">tiny_cts::TinyCTSPeripheralHandler Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -88,25 +88,25 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_tiny_c_t_s_desktop_8h_source.html">TinyCTSDesktop.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for tiny_cts::desktop::PeripheralHandler:</div>
+Inheritance diagram for tiny_cts::TinyCTSPeripheralHandler:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classtiny__cts_1_1desktop_1_1_peripheral_handler.png" usemap="#tiny_5Fcts_3A_3Adesktop_3A_3APeripheralHandler_map" alt=""/>
-  <map id="tiny_5Fcts_3A_3Adesktop_3A_3APeripheralHandler_map" name="tiny_5Fcts_3A_3Adesktop_3A_3APeripheralHandler_map">
-<area href="classtiny__cts_1_1_tiny_c_t_s_server.html" title="A BLE peripheral that offers the Current Time Service (0x1805) and serves the time of a time source t..." alt="tiny_cts::TinyCTSServer" shape="rect" coords="0,56,214,80"/>
+  <img src="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.png" usemap="#tiny_5Fcts_3A_3ATinyCTSPeripheralHandler_map" alt=""/>
+  <map id="tiny_5Fcts_3A_3ATinyCTSPeripheralHandler_map" name="tiny_5Fcts_3A_3ATinyCTSPeripheralHandler_map">
+<area href="classtiny__cts_1_1_tiny_c_t_s_server.html" title="A BLE peripheral that offers the Current Time Service (0x1805) and serves the time of a time source t..." alt="tiny_cts::TinyCTSServer" shape="rect" coords="0,56,213,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0a3da83e4df3cda0ad9731a3a4bdf115" id="r_a0a3da83e4df3cda0ad9731a3a4bdf115"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a3da83e4df3cda0ad9731a3a4bdf115">onRead</a> (uint16_t uuid, std::vector&lt; uint8_t &gt; &amp;value)=0</td></tr>
-<tr class="memitem:aece7b8891be6bd0ee6989549a680731b" id="r_aece7b8891be6bd0ee6989549a680731b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aece7b8891be6bd0ee6989549a680731b">onWrite</a> (uint16_t uuid, const uint8_t *data, size_t len)=0</td></tr>
+<tr class="memitem:acb63040f6fdecf9ef70834fe832f5939" id="r_acb63040f6fdecf9ef70834fe832f5939"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb63040f6fdecf9ef70834fe832f5939">onRead</a> (uint16_t uuid, std::vector&lt; uint8_t &gt; &amp;value)=0</td></tr>
+<tr class="memitem:ae2ce49a83e387e5ba9305917a45c5916" id="r_ae2ce49a83e387e5ba9305917a45c5916"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2ce49a83e387e5ba9305917a45c5916">onWrite</a> (uint16_t uuid, const uint8_t *data, size_t len)=0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The requests of the clients, answered by the server. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a0a3da83e4df3cda0ad9731a3a4bdf115" name="a0a3da83e4df3cda0ad9731a3a4bdf115"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a3da83e4df3cda0ad9731a3a4bdf115">&#9670;&#160;</a></span>onRead()</h2>
+<a id="acb63040f6fdecf9ef70834fe832f5939" name="acb63040f6fdecf9ef70834fe832f5939"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb63040f6fdecf9ef70834fe832f5939">&#9670;&#160;</a></span>onRead()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -115,7 +115,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool tiny_cts::desktop::PeripheralHandler::onRead </td>
+          <td class="memname">virtual bool tiny_cts::TinyCTSPeripheralHandler::onRead </td>
           <td>(</td>
           <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>uuid</em></span>, </td>
         </tr>
@@ -137,8 +137,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aece7b8891be6bd0ee6989549a680731b" name="aece7b8891be6bd0ee6989549a680731b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aece7b8891be6bd0ee6989549a680731b">&#9670;&#160;</a></span>onWrite()</h2>
+<a id="ae2ce49a83e387e5ba9305917a45c5916" name="ae2ce49a83e387e5ba9305917a45c5916"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2ce49a83e387e5ba9305917a45c5916">&#9670;&#160;</a></span>onWrite()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,7 +147,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool tiny_cts::desktop::PeripheralHandler::onWrite </td>
+          <td class="memname">virtual bool tiny_cts::TinyCTSPeripheralHandler::onWrite </td>
           <td>(</td>
           <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>uuid</em></span>, </td>
         </tr>

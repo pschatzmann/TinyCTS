@@ -97,11 +97,11 @@ Inheritance diagram for tiny_cts::TinyCTSServer:</div>
  <div class="center">
   <img src="classtiny__cts_1_1_tiny_c_t_s_server.png" usemap="#tiny_5Fcts_3A_3ATinyCTSServer_map" alt=""/>
   <map id="tiny_5Fcts_3A_3ATinyCTSServer_map" name="tiny_5Fcts_3A_3ATinyCTSServer_map">
-<area href="classtiny__cts_1_1_tiny_c_t_s_server_base.html" title="Settings and values of a TinyCTSServer. Use TinyCTSServer, which adds the Bluetooth part." alt="tiny_cts::TinyCTSServerBase" shape="rect" coords="0,0,214,24"/>
-<area href="classtiny__cts_1_1desktop_1_1_peripheral_handler.html" title="The requests of the clients, answered by the server." alt="tiny_cts::desktop::PeripheralHandler" shape="rect" coords="224,0,438,24"/>
-<area href="classtiny__cts_1_1_tiny_c_t_s_server_base.html" title="Settings and values of a TinyCTSServer. Use TinyCTSServer, which adds the Bluetooth part." alt="tiny_cts::TinyCTSServerBase" shape="rect" coords="448,0,662,24"/>
-<area href="classtiny__cts_1_1_tiny_c_t_s_server_base.html" title="Settings and values of a TinyCTSServer. Use TinyCTSServer, which adds the Bluetooth part." alt="tiny_cts::TinyCTSServerBase" shape="rect" coords="672,0,886,24"/>
-<area href="classtiny__cts_1_1_tiny_c_t_s_server_base.html" title="Settings and values of a TinyCTSServer. Use TinyCTSServer, which adds the Bluetooth part." alt="tiny_cts::TinyCTSServerBase" shape="rect" coords="1120,0,1334,24"/>
+<area href="classtiny__cts_1_1_tiny_c_t_s_server_base.html" title="Settings and values of a TinyCTSServer. Use TinyCTSServer, which adds the Bluetooth part." alt="tiny_cts::TinyCTSServerBase" shape="rect" coords="0,0,213,24"/>
+<area href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.html" title="The requests of the clients, answered by the server." alt="tiny_cts::TinyCTSPeripheralHandler" shape="rect" coords="223,0,436,24"/>
+<area href="classtiny__cts_1_1_tiny_c_t_s_server_base.html" title="Settings and values of a TinyCTSServer. Use TinyCTSServer, which adds the Bluetooth part." alt="tiny_cts::TinyCTSServerBase" shape="rect" coords="446,0,659,24"/>
+<area href="classtiny__cts_1_1_tiny_c_t_s_server_base.html" title="Settings and values of a TinyCTSServer. Use TinyCTSServer, which adds the Bluetooth part." alt="tiny_cts::TinyCTSServerBase" shape="rect" coords="669,0,882,24"/>
+<area href="classtiny__cts_1_1_tiny_c_t_s_server_base.html" title="Settings and values of a TinyCTSServer. Use TinyCTSServer, which adds the Bluetooth part." alt="tiny_cts::TinyCTSServerBase" shape="rect" coords="1115,0,1328,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -256,8 +256,8 @@ NimBLECharacteristic *&#160;</td><td class="memItemRight" valign="bottom"><b>_lo
 <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_server_1_1_value.html">Value</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_local</b> = nullptr</td></tr>
 <tr class="memitem:a73abeeb12a63d673d9dc44df44a1b714" id="r_a73abeeb12a63d673d9dc44df44a1b714"><td class="memItemLeft" align="right" valign="top"><a id="a73abeeb12a63d673d9dc44df44a1b714" name="a73abeeb12a63d673d9dc44df44a1b714"></a>
 std::recursive_mutex&#160;</td><td class="memItemRight" valign="bottom"><b>_mutex</b></td></tr>
-<tr class="memitem:ab8bbb23273f4012a2ea0eb0d5d87722d" id="r_ab8bbb23273f4012a2ea0eb0d5d87722d"><td class="memItemLeft" align="right" valign="top"><a id="ab8bbb23273f4012a2ea0eb0d5d87722d" name="ab8bbb23273f4012a2ea0eb0d5d87722d"></a>
-std::unique_ptr&lt; <a class="el" href="classtiny__cts_1_1desktop_1_1_peripheral.html">desktop::Peripheral</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_peripheral</b></td></tr>
+<tr class="memitem:a892b05fbb8e74be1ae9003cadb96e34b" id="r_a892b05fbb8e74be1ae9003cadb96e34b"><td class="memItemLeft" align="right" valign="top"><a id="a892b05fbb8e74be1ae9003cadb96e34b" name="a892b05fbb8e74be1ae9003cadb96e34b"></a>
+std::unique_ptr&lt; <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_peripheral.html">TinyCTSPeripheral</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_peripheral</b></td></tr>
 <tr class="memitem:a72b4f48781a8ff43c712c02ad3bb5112" id="r_a72b4f48781a8ff43c712c02ad3bb5112"><td class="memItemLeft" align="right" valign="top"><a id="a72b4f48781a8ff43c712c02ad3bb5112" name="a72b4f48781a8ff43c712c02ad3bb5112"></a>
 BLECharacteristic *&#160;</td><td class="memItemRight" valign="bottom"><b>_reference</b> = nullptr</td></tr>
 <tr class="memitem:abcbdeff8f7e8fc326e2cf6aea2ebdab5" id="r_abcbdeff8f7e8fc326e2cf6aea2ebdab5"><td class="memItemLeft" align="right" valign="top"><a id="abcbdeff8f7e8fc326e2cf6aea2ebdab5" name="abcbdeff8f7e8fc326e2cf6aea2ebdab5"></a>
@@ -522,7 +522,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_timeIsLocal</b> = fa
 </div><div class="memdoc">
 <p>A client reads a characteristic: return its value. </p>
 
-<p>Implements <a class="el" href="classtiny__cts_1_1desktop_1_1_peripheral_handler.html#a0a3da83e4df3cda0ad9731a3a4bdf115">tiny_cts::desktop::PeripheralHandler</a>.</p>
+<p>Implements <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.html#acb63040f6fdecf9ef70834fe832f5939">tiny_cts::TinyCTSPeripheralHandler</a>.</p>
 
 </div>
 </div>
@@ -755,7 +755,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_timeIsLocal</b> = fa
 </div><div class="memdoc">
 <p>A client writes a characteristic: return false to refuse. </p>
 
-<p>Implements <a class="el" href="classtiny__cts_1_1desktop_1_1_peripheral_handler.html#aece7b8891be6bd0ee6989549a680731b">tiny_cts::desktop::PeripheralHandler</a>.</p>
+<p>Implements <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.html#ae2ce49a83e387e5ba9305917a45c5916">tiny_cts::TinyCTSPeripheralHandler</a>.</p>
 
 </div>
 </div>

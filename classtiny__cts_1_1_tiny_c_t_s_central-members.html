@@ -71,25 +71,23 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>tiny_cts</b></li><li class="navelem"><b>bluez</b></li><li class="navelem"><a href="structtiny__cts_1_1bluez_1_1_device.html">Device</a></li>  </ul>
+<li class="navelem"><b>tiny_cts</b></li><li class="navelem"><a href="classtiny__cts_1_1_tiny_c_t_s_central.html">TinyCTSCentral</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
-  <div class="headertitle"><div class="title">tiny_cts::bluez::Device Member List</div></div>
+  <div class="headertitle"><div class="title">tiny_cts::TinyCTSCentral Member List</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>address</b> (defined in <a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a>)</td><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>connected</b> (defined in <a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a>)</td><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html#aa721aa50a8e604ae5ae5e6cef9492a4d">cts</a></td><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>name</b> (defined in <a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a>)</td><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>path</b> (defined in <a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a>)</td><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html#ab7135dcdb67901c9df26d89a67cc8739">resolved</a></td><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>rssi</b> (defined in <a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a>)</td><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html#a7336e4d9aab9100e937366edf7a8a1a6">seen</a></td><td class="entry"><a class="el" href="structtiny__cts_1_1bluez_1_1_device.html">tiny_cts::bluez::Device</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html#a2edcefc15032240915ec813bc75429e7">connect</a>(const std::string &amp;device, uint32_t timeoutMs, TinyCTSScanEntry &amp;found, std::string &amp;error)=0</td><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html#a41719db019431bf9926220807244ec80">disconnect</a>()=0</td><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html#a1349b65a480a3ed27953d9ce02665b13">read</a>(uint16_t uuid, std::vector&lt; uint8_t &gt; &amp;value, std::string &amp;error)=0</td><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html#a5bd30f90c84294c106f4661e03ab66ac">scan</a>(uint32_t timeoutMs, std::vector&lt; TinyCTSScanEntry &gt; &amp;result, std::string &amp;error)=0</td><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html#a08489bbd87c244a18d355f434de921bb">write</a>(uint16_t uuid, const uint8_t *data, size_t len, std::string &amp;error)=0</td><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>~TinyCTSCentral</b>()=default (defined in <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a>)</td><td class="entry"><a class="el" href="classtiny__cts_1_1_tiny_c_t_s_central.html">tiny_cts::TinyCTSCentral</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
