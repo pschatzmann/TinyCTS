@@ -67,7 +67,7 @@ static std::string stateError(CBManagerState state) {
 /// The delegate of CBCentralManager and CBPeripheral: collects the devices that
 /// are found, connects to one and keeps the characteristics of its Current
 /// Time Service. The delegate methods run on a dispatch queue of their own.
-@interface TCCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface TinyCTSCBCentral : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 @property(strong) dispatch_queue_t queue;
 @property(strong) CBCentralManager* manager;
 @property(strong) NSMutableDictionary<NSString*, NSDictionary*>* seen;
@@ -81,7 +81,7 @@ static std::string stateError(CBManagerState state) {
 @property BOOL disconnected;
 @end
 
-@implementation TCCentral
+@implementation TinyCTSCBCentral
 - (instancetype)init {
   self = [super init];
   if (self) {
@@ -168,11 +168,13 @@ static std::string stateError(CBManagerState state) {
 }
 @end
 
-/// The client side for macOS: TinyCTSCentral on top of TCCentral. The functions
+namespace {
+
+/// The client side for macOS: TinyCTSCentral on top of TinyCTSCBCentral. The functions
 /// block until the delegate has set the flag that they wait for.
 class CoreBluetoothCentral : public TinyCTSCentral {
  public:
-  CoreBluetoothCentral() { _c = [TCCentral new]; }
+  CoreBluetoothCentral() { _c = [TinyCTSCBCentral new]; }
   ~CoreBluetoothCentral() override { disconnect(); }
 
   bool scan(uint32_t timeoutMs, std::vector<TinyCTSScanEntry>& result,
@@ -318,14 +320,16 @@ class CoreBluetoothCentral : public TinyCTSCentral {
     return nil;
   }
 
-  TCCentral* _c;
+  TinyCTSCBCentral* _c;
 };
+
+}  // namespace
 
 // ---- Peripheral -------------------------------------------------------------
 /// The delegate of CBPeripheralManager: adds the service, advertises it and
-/// answers the read and write requests with the PeripheralHandler. The
+/// answers the read and write requests with the TinyCTSPeripheralHandler. The
 /// delegate methods run on a dispatch queue of their own.
-@interface TCPeripheral : NSObject <CBPeripheralManagerDelegate>
+@interface TinyCTSCBPeripheral : NSObject <CBPeripheralManagerDelegate>
 {
  @public
   TinyCTSPeripheralHandler* handler;
@@ -340,7 +344,7 @@ class CoreBluetoothCentral : public TinyCTSCentral {
 @property int subscribers;
 @end
 
-@implementation TCPeripheral
+@implementation TinyCTSCBPeripheral
 - (instancetype)init {
   self = [super init];
   if (self) {
@@ -409,10 +413,12 @@ class CoreBluetoothCentral : public TinyCTSCentral {
 }
 @end
 
-/// The server side for macOS: TinyCTSPeripheral on top of TCPeripheral.
+namespace {
+
+/// The server side for macOS: TinyCTSPeripheral on top of TinyCTSCBPeripheral.
 class CoreBluetoothPeripheral : public TinyCTSPeripheral {
  public:
-  CoreBluetoothPeripheral() { _p = [TCPeripheral new]; }
+  CoreBluetoothPeripheral() { _p = [TinyCTSCBPeripheral new]; }
   ~CoreBluetoothPeripheral() override { stop(); }
 
   bool start(const std::string& name, bool settable, bool encrypted,
@@ -487,8 +493,10 @@ class CoreBluetoothPeripheral : public TinyCTSPeripheral {
     [list addObject:c];
   }
 
-  TCPeripheral* _p;
+  TinyCTSCBPeripheral* _p;
 };
+
+}  // namespace
 
 namespace tiny_cts {
 
