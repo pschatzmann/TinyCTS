@@ -82,6 +82,11 @@ $(function() {
   <div class="headertitle"><div class="title">tiny_cts::TinyCTSBlueZPeripheral Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>The server side for Linux: exports the Current Time Service as a GATT application and an advertisement on D-Bus and registers them at BlueZ (GattManager1 and LEAdvertisingManager1). BlueZ calls back over D-Bus, so <a class="el" href="#a423b1e5966cb151093ac65ae90e20af6">process()</a> has to run the main context of GLib.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_tiny_c_t_s_blue_z_backend_8h_source.html">TinyCTSBlueZBackend.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tiny_cts::TinyCTSBlueZPeripheral:</div>
 <div class="dyncontent">
@@ -101,7 +106,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac7c23dadd8ddb09ff2cb6617f829f3ea" id="r_ac7c23dadd8ddb09ff2cb6617f829f3ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7c23dadd8ddb09ff2cb6617f829f3ea">start</a> (const std::string &amp;name, bool settable, bool encrypted, <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.html">TinyCTSPeripheralHandler</a> *handler, std::string &amp;error) override</td></tr>
 <tr class="memitem:a826e3be3371325b1f04b0b669e93d0d8" id="r_a826e3be3371325b1f04b0b669e93d0d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a826e3be3371325b1f04b0b669e93d0d8">stop</a> () override</td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The server side for Linux: exports the Current Time Service as a GATT application and an advertisement on D-Bus and registers them at BlueZ (GattManager1 and LEAdvertisingManager1). BlueZ calls back over D-Bus, so <a class="el" href="#a423b1e5966cb151093ac65ae90e20af6">process()</a> has to run the main context of GLib. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a98b73205c20008409aaaf3f5e2d3639e" name="a98b73205c20008409aaaf3f5e2d3639e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a98b73205c20008409aaaf3f5e2d3639e">&#9670;&#160;</a></span>notify()</h2>
 
