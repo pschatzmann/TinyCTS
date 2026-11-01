@@ -83,6 +83,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The server side (peripheral role) of the Bluetooth stack of the operating system: offers the Current Time Service (0x1805) with the characteristics Current Time (read, notify, write), Local Time Information (read, write) and Reference Time Information (read), and advertises it.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_tiny_c_t_s_desktop_8h_source.html">TinyCTSDesktop.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for tiny_cts::TinyCTSPeripheral:</div>
@@ -90,8 +93,8 @@ Inheritance diagram for tiny_cts::TinyCTSPeripheral:</div>
  <div class="center">
   <img src="classtiny__cts_1_1_tiny_c_t_s_peripheral.png" usemap="#tiny_5Fcts_3A_3ATinyCTSPeripheral_map" alt=""/>
   <map id="tiny_5Fcts_3A_3ATinyCTSPeripheral_map" name="tiny_5Fcts_3A_3ATinyCTSPeripheral_map">
-<area href="classanonymous__namespace_02_tiny_c_t_s_core_bluetooth_8mm_03_1_1_core_bluetooth_peripheral.html" title="The server side for macOS: TinyCTSPeripheral on top of TinyCTSCBPeripheral." alt="anonymous_namespace{TinyCTSCoreBluetooth.mm}::CoreBluetoothPeripheral" shape="rect" coords="0,56,450,80"/>
-<area href="classanonymous__namespace_02_tiny_c_t_s_win_r_t_8cpp_03_1_1_win_peripheral.html" alt="anonymous_namespace{TinyCTSWinRT.cpp}::WinPeripheral" shape="rect" coords="460,56,910,80"/>
+<area href="classanonymous__namespace_02_tiny_c_t_s_core_bluetooth_8mm_03_1_1_core_bluetooth_peripheral.html" title="The server side for macOS: TinyCTSPeripheral on top of TinyCTSCBPeripheral. The requests are answered..." alt="anonymous_namespace{TinyCTSCoreBluetooth.mm}::CoreBluetoothPeripheral" shape="rect" coords="0,56,450,80"/>
+<area href="classanonymous__namespace_02_tiny_c_t_s_win_r_t_8cpp_03_1_1_win_peripheral.html" title="The server side for Windows: TinyCTSPeripheral with GattServiceProvider. The events for the read and ..." alt="anonymous_namespace{TinyCTSWinRT.cpp}::WinPeripheral" shape="rect" coords="460,56,910,80"/>
 <area href="classtiny__cts_1_1_tiny_c_t_s_blue_z_peripheral.html" title="The server side for Linux: exports the Current Time Service as a GATT application and an advertisemen..." alt="tiny_cts::TinyCTSBlueZPeripheral" shape="rect" coords="920,56,1370,80"/>
   </map>
 </div></div>
@@ -104,7 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2f8fa1ff8ea71f604e9e1128c2a2dbb4" id="r_a2f8fa1ff8ea71f604e9e1128c2a2dbb4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f8fa1ff8ea71f604e9e1128c2a2dbb4">stop</a> ()=0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The server side of the operating system (peripheral role): the service 0x1805 with the characteristics Current Time (read, notify, write), Local Time Information (read, write) and Reference Time Information (read). </p>
+<div class="textblock"><p>The server side (peripheral role) of the Bluetooth stack of the operating system: offers the Current Time Service (0x1805) with the characteristics Current Time (read, notify, write), Local Time Information (read, write) and Reference Time Information (read), and advertises it. </p>
+<p>The values are not stored: the requests of the clients are given to a <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_peripheral_handler.html" title="The callbacks of a TinyCTSPeripheral: it asks the handler for the value when a client reads a charact...">TinyCTSPeripheralHandler</a>. BlueZ (Linux), CoreBluetooth (macOS) and WinRT (Windows) each implement it; <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_server.html" title="A BLE peripheral that offers the Current Time Service (0x1805) and serves the time of a time source t...">TinyCTSServer</a> uses it. Get an object with <a class="el" href="_tiny_c_t_s_blue_z_backend_8h.html#a38ec193e45b41570afa0089c11a7772b">ctsCreatePeripheral()</a>. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="af5621d63d3e7ee8587b4d7d0d649aae2" name="af5621d63d3e7ee8587b4d7d0d649aae2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5621d63d3e7ee8587b4d7d0d649aae2">&#9670;&#160;</a></span>notify()</h2>

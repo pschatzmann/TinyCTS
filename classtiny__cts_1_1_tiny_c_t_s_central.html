@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The client side of the operating system (central role).  
+<p>The client side (central role) of the Bluetooth stack of the operating system: finds a device, connects to it and reads or writes the characteristics of its Current Time Service.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_tiny_c_t_s_desktop_8h_source.html">TinyCTSDesktop.h</a>&gt;</code></p>
@@ -93,8 +93,8 @@ Inheritance diagram for tiny_cts::TinyCTSCentral:</div>
  <div class="center">
   <img src="classtiny__cts_1_1_tiny_c_t_s_central.png" usemap="#tiny_5Fcts_3A_3ATinyCTSCentral_map" alt=""/>
   <map id="tiny_5Fcts_3A_3ATinyCTSCentral_map" name="tiny_5Fcts_3A_3ATinyCTSCentral_map">
-<area href="classanonymous__namespace_02_tiny_c_t_s_core_bluetooth_8mm_03_1_1_core_bluetooth_central.html" alt="anonymous_namespace{TinyCTSCoreBluetooth.mm}::CoreBluetoothCentral" shape="rect" coords="0,56,432,80"/>
-<area href="classanonymous__namespace_02_tiny_c_t_s_win_r_t_8cpp_03_1_1_win_central.html" alt="anonymous_namespace{TinyCTSWinRT.cpp}::WinCentral" shape="rect" coords="442,56,874,80"/>
+<area href="classanonymous__namespace_02_tiny_c_t_s_core_bluetooth_8mm_03_1_1_core_bluetooth_central.html" title="The client side for macOS: TinyCTSCentral on top of TinyCTSCBCentral. The functions block until the d..." alt="anonymous_namespace{TinyCTSCoreBluetooth.mm}::CoreBluetoothCentral" shape="rect" coords="0,56,432,80"/>
+<area href="classanonymous__namespace_02_tiny_c_t_s_win_r_t_8cpp_03_1_1_win_central.html" title="The client side for Windows: TinyCTSCentral with BluetoothLEAdvertisementWatcher (scan) and Bluetooth..." alt="anonymous_namespace{TinyCTSWinRT.cpp}::WinCentral" shape="rect" coords="442,56,874,80"/>
 <area href="classtiny__cts_1_1_tiny_c_t_s_blue_z_central.html" title="The client side for Linux: scans, connects and reads or writes the characteristics through BlueZ (org..." alt="tiny_cts::TinyCTSBlueZCentral" shape="rect" coords="884,56,1316,80"/>
   </map>
 </div></div>
@@ -108,7 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a08489bbd87c244a18d355f434de921bb" id="r_a08489bbd87c244a18d355f434de921bb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08489bbd87c244a18d355f434de921bb">write</a> (uint16_t uuid, const uint8_t *data, size_t len, std::string &amp;error)=0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The client side of the operating system (central role). </p>
+<div class="textblock"><p>The client side (central role) of the Bluetooth stack of the operating system: finds a device, connects to it and reads or writes the characteristics of its Current Time Service. </p>
+<p>All the functions block until they are done and give the reason in the error string when they fail. BlueZ (Linux), CoreBluetooth (macOS) and WinRT (Windows) each implement it; <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_client.html" title="Reads the time from a BLE device that offers the Current Time Service (a phone, a watch,...">TinyCTSClient</a> uses it. Get an object with <a class="el" href="_tiny_c_t_s_blue_z_backend_8h.html#acb58b8cacf2e7f512f9530248d9b0d51">ctsCreateCentral()</a>. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a2edcefc15032240915ec813bc75429e7" name="a2edcefc15032240915ec813bc75429e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2edcefc15032240915ec813bc75429e7">&#9670;&#160;</a></span>connect()</h2>

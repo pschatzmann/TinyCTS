@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The requests of the clients, answered by the server.  
+<p>The callbacks of a <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_peripheral.html" title="The server side (peripheral role) of the Bluetooth stack of the operating system: offers the Current ...">TinyCTSPeripheral</a>: it asks the handler for the value when a client reads a characteristic, and passes on what a client writes. <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_server.html" title="A BLE peripheral that offers the Current Time Service (0x1805) and serves the time of a time source t...">TinyCTSServer</a> implements it.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_tiny_c_t_s_desktop_8h_source.html">TinyCTSDesktop.h</a>&gt;</code></p>
@@ -103,7 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae2ce49a83e387e5ba9305917a45c5916" id="r_ae2ce49a83e387e5ba9305917a45c5916"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2ce49a83e387e5ba9305917a45c5916">onWrite</a> (uint16_t uuid, const uint8_t *data, size_t len)=0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The requests of the clients, answered by the server. </p>
+<div class="textblock"><p>The callbacks of a <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_peripheral.html" title="The server side (peripheral role) of the Bluetooth stack of the operating system: offers the Current ...">TinyCTSPeripheral</a>: it asks the handler for the value when a client reads a characteristic, and passes on what a client writes. <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_server.html" title="A BLE peripheral that offers the Current Time Service (0x1805) and serves the time of a time source t...">TinyCTSServer</a> implements it. </p>
+<p>The functions may be called from a thread of the Bluetooth stack (macOS, Windows) or from <a class="el" href="classtiny__cts_1_1_tiny_c_t_s_peripheral.html#a59cc4be1b45848d9712d0b47e8e0fe50">TinyCTSPeripheral::process()</a> (Linux). </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="acb63040f6fdecf9ef70834fe832f5939" name="acb63040f6fdecf9ef70834fe832f5939"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acb63040f6fdecf9ef70834fe832f5939">&#9670;&#160;</a></span>onRead()</h2>
