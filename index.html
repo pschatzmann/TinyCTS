@@ -96,11 +96,12 @@ Features</h1>
 <li>Optionally lets paired clients set the time</li>
 </ul>
 <p><b>General</b></p><ul>
-<li><span class="tt">tinycts</span>: command line tool for the desktop (Linux, macOS, Windows) to read the time of a device, serve the time of your computer, set the time of a device and show the time zone of your computer</li>
-<li>The same classes on ESP32, nRF5, Arduino Nano 33 BLE / Uno R4 WiFi (ArduinoBLE), Raspberry Pi Pico W and the desktop</li>
+<li><span class="tt">tinycts</span>: command line tool for the desktop (Linux; macOS and Windows are <em>experimental</em>) to read the time of a device, serve the time of your computer, set the time of a device and show the time zone of your computer</li>
+<li>The same classes on ESP32, nRF5, Arduino Nano 33 BLE / Uno R4 WiFi (ArduinoBLE), Raspberry Pi Pico W and the desktop (Linux; macOS and Windows are <em>experimental</em>)</li>
 <li>Header-only, easy to integrate</li>
 <li>cmake support</li>
 </ul>
+<p><b>Experimental:</b> the backends for macOS (CoreBluetooth) and Windows (WinRT) have not been compiled or run yet. They are included so that they can be tried and improved; please report problems.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
 Quick Start</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_tiny_c_t_s_8h.html">TinyCTS.h</a>&quot;</span></div>
@@ -138,7 +139,7 @@ Quick Start</h1>
 Documentation</h1>
 <ul>
 <li><a href="https://pschatzmann.github.io/TinyCTS/annotated.html">Class Documentation</a></li>
-<li><a href="https://github.com/pschatzmann/TinyCTS/wiki/Bluetooth-Stacks">Bluetooth Stacks</a>: the supported platforms (ESP32, nRF5, ArduinoBLE boards, Pico W, Linux, macOS, Windows), notes for each and the source layout</li>
+<li><a href="https://github.com/pschatzmann/TinyCTS/wiki/Bluetooth-Stacks">Bluetooth Stacks</a>: the supported platforms (ESP32, nRF5, ArduinoBLE boards, Pico W, Linux, macOS and Windows (experimental)), notes for each and the source layout</li>
 <li><a href="https://github.com/pschatzmann/TinyCTS/wiki/CTS-or-NTP">CTS or NTP?</a>: what Bluetooth time is good for, where NTP is better, and how to use both together with TinyNTP</li>
 <li><a href="https://github.com/pschatzmann/TinyCTS/wiki/Time-Zones">Time Zones</a>: Local Time Information, UTC or local time</li>
 <li><a href="https://github.com/pschatzmann/TinyCTS/wiki/Server-Time-Sources">Server Time Sources</a>: software clock, system time, TinyNTP and your own sources for the server</li>
