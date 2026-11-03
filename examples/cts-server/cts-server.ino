@@ -19,5 +19,5 @@ void setup() {
 
 void loop() {
   server.process();
-  delay(100);
+  delay(10);
 }

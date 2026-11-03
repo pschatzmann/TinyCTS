@@ -6,9 +6,9 @@ TinyCTSClient cts;  // the first device that offers the service
 
 void setup() {
   Serial.begin(115200);
-  if (!cts.begin()) {
+  while (!cts.begin()) {
     Serial.println("no device with the Current Time Service found");
-    return;
+    delay(1000);
   }
   Serial.print("time from ");
   Serial.print(cts.getDeviceName().c_str());
