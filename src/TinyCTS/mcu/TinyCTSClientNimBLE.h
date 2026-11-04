@@ -56,16 +56,20 @@ class TinyCTSClient : public TinyCTSClientBase {
    * connected, read and disconnected.
    * @return true if the time was read.
    */
-  bool update() {
+  bool update() override {
     NimBLEClient* client = connect();
     if (client == nullptr) return false;
     bool ok = false;
     NimBLERemoteService* service = client->getService(NimBLEUUID(CTS_SERVICE_UUID));
-    if (service != nullptr) {
+    if (service == nullptr) {
+      _error = "the device has no Current Time Service";
+    } else {
       readInfo(service);
       NimBLERemoteCharacteristic* chr =
           service->getCharacteristic(NimBLEUUID(CTS_CURRENT_TIME_UUID));
-      if (chr != nullptr && chr->canRead()) {
+      if (chr == nullptr || !chr->canRead()) {
+        _error = "the Current Time cannot be read";
+      } else {
         uint32_t t0 = TINY_CTS_MILLIS();
         NimBLEAttValue v = chr->readValue();
         uint32_t t1 = TINY_CTS_MILLIS();
@@ -99,6 +103,7 @@ class TinyCTSClient : public TinyCTSClientBase {
 
  protected:
   NimBLEClient* connect() {
+    _error.clear();
     NimBLEScan* scan = NimBLEDevice::getScan();
     scan->setActiveScan(true);
     NimBLEScanResults results = scan->getResults(_scanMs, false);
@@ -111,11 +116,18 @@ class TinyCTSClient : public TinyCTSClientBase {
         found = d;
       }
     }
-    if (found == nullptr) return nullptr;
+    if (found == nullptr) {
+      _error = "no device found";
+      return nullptr;
+    }
     NimBLEClient* client = NimBLEDevice::createClient();
-    if (client == nullptr) return nullptr;
+    if (client == nullptr) {
+      _error = "no Bluetooth client available";
+      return nullptr;
+    }
     if (!client->connect(found)) {
       NimBLEDevice::deleteClient(client);
+      _error = "cannot connect";
       return nullptr;
     }
     _name = found->getName();

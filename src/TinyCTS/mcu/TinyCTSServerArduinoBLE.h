@@ -79,8 +79,12 @@ class TinyCTSServer : public TinyCTSServerBase {
     BLE.setLocalName(deviceName);
     BLE.setDeviceName(deviceName);
     BLE.setAdvertisedService(*_service);
+    if (_advertisingMs > 0) BLE.setAdvertisingInterval(static_cast<uint16_t>(_advertisingMs * 8 / 5));
     return BLE.advertise() != 0;
   }
+
+  /** @brief Number of connected clients (ArduinoBLE: 0 or 1). */
+  int getConnectedCount() override { return BLE.connected() ? 1 : 0; }
 
   /** @brief Stop advertising. */
   void end() {

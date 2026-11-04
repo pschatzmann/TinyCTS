@@ -56,7 +56,7 @@ class TinyCTSClient : public TinyCTSClientBase {
    * connected, read and disconnected.
    * @return true if the time was read.
    */
-  bool update() {
+  bool update() override {
     BLEDevice peripheral;
     if (!connect(peripheral)) return false;
     uint8_t data[16];
@@ -64,8 +64,12 @@ class TinyCTSClient : public TinyCTSClientBase {
     if (read(peripheral, "2a0f", data, len)) storeLocalInfo(data, len);
     if (read(peripheral, "2a14", data, len)) storeReferenceInfo(data, len);
     uint32_t t0 = TINY_CTS_MILLIS();
-    bool ok = read(peripheral, "2a2b", data, len) &&
-              storeCurrentTime(data, len, t0, TINY_CTS_MILLIS());
+    bool ok = false;
+    if (!read(peripheral, "2a2b", data, len)) {
+      _error = "the Current Time cannot be read";
+    } else {
+      ok = storeCurrentTime(data, len, t0, TINY_CTS_MILLIS());
+    }
     peripheral.disconnect();
     return ok;
   }
@@ -98,6 +102,7 @@ class TinyCTSClient : public TinyCTSClientBase {
   }
 
   bool connect(BLEDevice& peripheral) {
+    _error.clear();
     BLE.scan();
     uint32_t start = millis();
     bool found = false;
@@ -114,9 +119,17 @@ class TinyCTSClient : public TinyCTSClientBase {
       }
     }
     BLE.stopScan();
-    if (!found || !peripheral.connect()) return false;
+    if (!found) {
+      _error = "no device found";
+      return false;
+    }
+    if (!peripheral.connect()) {
+      _error = "cannot connect";
+      return false;
+    }
     if (!peripheral.discoverAttributes()) {
       peripheral.disconnect();
+      _error = "cannot discover the services";
       return false;
     }
     return true;

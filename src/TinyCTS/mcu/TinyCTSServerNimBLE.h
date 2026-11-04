@@ -50,6 +50,13 @@ class TinyCTSServer : public TinyCTSServerBase, public NimBLECharacteristicCallb
   bool begin(TinyCTSTimeSource& source, const char* deviceName = "TinyCTS") {
     _source = &source;
     if (!NimBLEDevice::isInitialized()) NimBLEDevice::init(deviceName);
+    if (_current != nullptr) {
+      // started before (and stopped with end()): the service exists already
+      updateCurrent(0);
+      updateLocal();
+      updateReference();
+      return startAdvertising();
+    }
     NimBLEServer* server = NimBLEDevice::getServer();
     if (server == nullptr) server = NimBLEDevice::createServer();
     if (server == nullptr) return false;
@@ -84,13 +91,27 @@ class TinyCTSServer : public TinyCTSServerBase, public NimBLECharacteristicCallb
     NimBLEAdvertising* adv = NimBLEDevice::getAdvertising();
     adv->addServiceUUID(NimBLEUUID(CTS_SERVICE_UUID));
     adv->enableScanResponse(true);
-    return adv->start();
+    return startAdvertising();
   }
 
-  /** @brief Stop advertising. */
+  /**
+   * @brief Stop advertising and disconnect the clients. The time is reported
+   * as unknown until begin() is called again.
+   */
   void end() {
     NimBLEDevice::getAdvertising()->stop();
+    NimBLEServer* server = NimBLEDevice::getServer();
+    if (server != nullptr) {
+      for (uint16_t handle : server->getPeerDevices()) server->disconnect(handle);
+    }
     _source = nullptr;
+    if (_current != nullptr) updateCurrent(0);
+  }
+
+  /** @brief Number of connected clients. */
+  int getConnectedCount() override {
+    NimBLEServer* server = NimBLEDevice::getServer();
+    return server != nullptr ? server->getConnectedCount() : 0;
   }
 
   /**
@@ -137,6 +158,17 @@ class TinyCTSServer : public TinyCTSServerBase, public NimBLECharacteristicCallb
       updateLocal();
       notifyTime(TinyCTSCurrentTime::TimeZoneChange);
     }
+  }
+
+  bool startAdvertising() {
+    NimBLEAdvertising* adv = NimBLEDevice::getAdvertising();
+    if (_advertisingMs > 0) {
+      // units of 0.625 ms
+      const uint16_t units = static_cast<uint16_t>(_advertisingMs * 8 / 5);
+      adv->setMinInterval(units);
+      adv->setMaxInterval(units);
+    }
+    return adv->start();
   }
 
   void updateCurrent(uint8_t reason) {

@@ -77,4 +77,88 @@ TEST(wanted_device) {
   CHECK(c.is("00:00:00:00:00:00", "my-clock"));
 }
 
+
+TEST(round_trip_and_update_time) {
+  Client c;
+  CHECK_EQ(c.getRoundTripMs(), 0u);
+  uint8_t d[10];
+  TinyCTSCurrentTime::fromUnixMs(1767225600000ULL).encode(d);
+  CHECK(c.store(d, 10, 9000, 9060));
+  CHECK_EQ(c.getRoundTripMs(), 60u);
+  CHECK_EQ(c.getUpdateMillis(), 9060u);
+  CHECK(c.getLastError().empty());
+}
+
+TEST(error_for_an_unknown_time) {
+  Client c;
+  uint8_t d[10] = {0};
+  CHECK(!c.store(d, 10, 0, 0));
+  CHECK(!c.getLastError().empty());
+}
+
+
+/// A client whose update() "reads" a device with a fixed clock.
+struct AutoClient : TinyCTSClientBase {
+  int reads = 0;
+  bool reachable = true;
+  uint64_t deviceMs = 1767225600000ULL;  // device time at fakeMillis = 0
+  bool update() override {
+    reads++;
+    if (!reachable) return false;
+    uint8_t d[10];
+    TinyCTSCurrentTime::fromUnixMs(deviceMs + fakeMillis).encode(d);
+    return storeCurrentTime(d, 10, fakeMillis, fakeMillis);
+  }
+};
+
+TEST(manual_by_default) {
+  fakeMillis = 1000;
+  AutoClient c;
+  CHECK_EQ(c.getTimeMs(), (uint64_t)0);
+  CHECK_EQ(c.reads, 0);
+}
+
+TEST(reads_when_unknown_and_after_the_interval) {
+  fakeMillis = 1000;
+  AutoClient c;
+  c.setUpdateInterval(3600000);
+  CHECK_NEAR(c.getTimeMs(), c.deviceMs + 1000, 8);  // first read
+  CHECK_EQ(c.reads, 1);
+  fakeMillis += 1800000;  // half an hour: extrapolated
+  CHECK_NEAR(c.getTimeMs(), c.deviceMs + fakeMillis, 8);
+  CHECK_EQ(c.reads, 1);
+  fakeMillis += 1800000;  // one hour after the read: read again
+  c.getTimeMs();
+  CHECK_EQ(c.reads, 2);
+}
+
+TEST(failed_reads_wait_for_the_retry_time) {
+  fakeMillis = 1000;
+  AutoClient c;
+  c.reachable = false;
+  c.setUpdateInterval(3600000, 60000);
+  CHECK_EQ(c.getTimeMs(), (uint64_t)0);
+  CHECK_EQ(c.reads, 1);
+  fakeMillis += 30000;
+  CHECK_EQ(c.getTimeMs(), (uint64_t)0);  // no new attempt yet
+  CHECK_EQ(c.reads, 1);
+  fakeMillis += 30000;
+  c.reachable = true;
+  CHECK(c.getTimeMs() != 0);  // retry
+  CHECK_EQ(c.reads, 2);
+}
+
+TEST(update_only_in_update_if_due) {
+  fakeMillis = 1000;
+  AutoClient c;
+  c.setUpdateInterval(3600000);
+  c.setUpdateInGetTime(false);
+  CHECK_EQ(c.getTimeMs(), (uint64_t)0);  // getTimeMs() does not block
+  CHECK_EQ(c.reads, 0);
+  CHECK(c.updateIfDue());
+  CHECK(!c.updateIfDue());  // not due again
+  CHECK_EQ(c.reads, 1);
+  CHECK(c.getTimeMs() != 0);
+}
+
 TEST_MAIN("clientbase")

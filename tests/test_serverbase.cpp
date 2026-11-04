@@ -137,4 +137,37 @@ TEST(notify_interval) {
   CHECK(s.due());
 }
 
+
+TEST(days_and_hours_since_update) {
+  Server s;
+  Source src;
+  s.attach(src);
+  uint8_t d[4];
+  s.setReferenceInfo(TinyCTSReferenceTimeInfo::GPS, 2, 3, 4);
+  s.reference(d);
+  CHECK_EQ(d[0], 2);  // GPS
+  CHECK_EQ(d[1], 2);
+  CHECK_EQ(d[2], 3);
+  CHECK_EQ(d[3], 4);
+  s.setTimeSinceUpdateMs(50ULL * 3600000ULL);  // 2 days 2 hours
+  s.reference(d);
+  CHECK_EQ(d[0], 2);  // source and accuracy are kept
+  CHECK_EQ(d[1], 2);
+  CHECK_EQ(d[2], 2);
+  CHECK_EQ(d[3], 2);
+  s.setTimeSinceUpdateMs(300ULL * 24 * 3600000ULL);
+  s.reference(d);
+  CHECK_EQ(d[2], 255);
+  CHECK_EQ(d[3], 255);
+}
+
+TEST(active_and_connections) {
+  Server s;
+  CHECK(!s.isActive());
+  CHECK_EQ(s.getConnectedCount(), -1);
+  Source src;
+  s.attach(src);
+  CHECK(s.isActive());
+}
+
 TEST_MAIN("serverbase")

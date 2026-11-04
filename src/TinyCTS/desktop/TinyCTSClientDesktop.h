@@ -55,7 +55,7 @@ class TinyCTSClient : public TinyCTSClientBase {
    * connected, read and disconnected.
    * @return true if the time was read. The reason is in getLastError().
    */
-  bool update() {
+  bool update() override {
     if (!connect()) return false;
     bool ok = false;
     std::vector<uint8_t> data;
@@ -130,11 +130,7 @@ class TinyCTSClient : public TinyCTSClientBase {
     return result;
   }
 
-  /** @brief The reason why the last call failed. */
-  const std::string& getLastError() const { return _error; }
 
-  /** @brief The round trip time of the last read or write in ms (the connection interval). */
-  uint32_t getRoundTripMs() const { return _roundTripMs; }
 
  protected:
   TinyCTSCentral* central() {
@@ -154,9 +150,7 @@ class TinyCTSClient : public TinyCTSClientBase {
   }
 
   uint32_t _scanMs;
-  uint32_t _roundTripMs = 0;
   std::string _adapterName = "hci0";
-  std::string _error;
   std::unique_ptr<TinyCTSCentral> _central;
 };
 

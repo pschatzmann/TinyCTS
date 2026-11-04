@@ -41,12 +41,55 @@ class TinyCTSServerBase {
     onTimeZoneChanged();
   }
 
-  /** @brief Where the time comes from and how exact it is (125 ms steps). */
-  void setReferenceInfo(uint8_t source, uint8_t accuracy = 255) {
+  /**
+   * @brief Where the time comes from and how exact it is.
+   * @param source TinyCTSReferenceTimeInfo::Source (e.g. GPS)
+   * @param accuracy In 125 ms steps (0-253), 254: more than 31.5 s, 255:
+   * unknown.
+   * @param daysSinceUpdate Days since the clock was set from the source
+   * (255: 255 or more / unknown).
+   * @param hoursSinceUpdate Hours (0-23) in addition to the days (255 if the
+   * days are 255).
+   */
+  void setReferenceInfo(uint8_t source, uint8_t accuracy = 255, uint8_t daysSinceUpdate = 255,
+                        uint8_t hoursSinceUpdate = 255) {
     _ref.source = source;
     _ref.accuracy = accuracy;
+    _ref.daysSinceUpdate = daysSinceUpdate;
+    _ref.hoursSinceUpdate = daysSinceUpdate == 255 ? 255 : hoursSinceUpdate;
     onReferenceChanged();
   }
+
+  /**
+   * @brief The reference was updated `ms` milliseconds ago: sets the days
+   * and hours of the Reference Time Information (keeps the source and
+   * accuracy).
+   */
+  void setTimeSinceUpdateMs(uint64_t ms) {
+    const uint64_t hours = ms / 3600000ULL;
+    const uint64_t days = hours / 24;
+    if (days >= 255) {
+      setReferenceInfo(_ref.source, _ref.accuracy, 255, 255);
+    } else {
+      setReferenceInfo(_ref.source, _ref.accuracy, static_cast<uint8_t>(days),
+                       static_cast<uint8_t>(hours % 24));
+    }
+  }
+
+  /**
+   * @brief The advertising interval in ms (default: the one of the Bluetooth
+   * stack). Call it before begin(). Used by NimBLE and ArduinoBLE.
+   */
+  void setAdvertisingInterval(uint16_t ms) { _advertisingMs = ms; }
+
+  /**
+   * @brief Number of connected clients; -1 if the Bluetooth stack does not
+   * report it.
+   */
+  virtual int getConnectedCount() { return -1; }
+
+  /** @brief True between begin() and end(). */
+  bool isActive() const { return _source != nullptr; }
 
   /**
    * @brief The Current Time contains the local time (UTC + the offsets of the
@@ -134,6 +177,7 @@ class TinyCTSServerBase {
   TinyCTSLocalTimeInfo _info;
   TinyCTSReferenceTimeInfo _ref;
   uint32_t _notifyMs = 0;
+  uint16_t _advertisingMs = 0;
   uint32_t _lastNotify = 0;
   uint32_t _setCount = 0;
   bool _timeIsLocal = false;

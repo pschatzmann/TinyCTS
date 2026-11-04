@@ -110,6 +110,14 @@ class TinyCTSPeripheral {
   /** Send the new value of a characteristic to the subscribed clients. */
   virtual void notify(uint16_t uuid, const std::vector<uint8_t>& value) = 0;
 
+  /**
+   * The number of connected clients as far as the stack reports it: BlueZ
+   * the devices connected to the adapter, CoreBluetooth and WinRT the clients
+   * that subscribed to the Current Time (they report no other connections).
+   * -1 if not known.
+   */
+  virtual int connectedCount() { return -1; }
+
   /** Stop. */
   virtual void stop() = 0;
 };

@@ -104,6 +104,16 @@ class TinyCTSServer : public TinyCTSServerBase, private TinyCTSPeripheralHandler
   /** @brief The reason why begin() failed. */
   const std::string& getLastError() const { return _error; }
 
+  /**
+   * @brief Number of connected clients: on Linux the devices connected to the
+   * adapter, on macOS and Windows the clients that subscribed to the Current
+   * Time (the only connections these systems report). 0 when stopped.
+   */
+  int getConnectedCount() override {
+    std::lock_guard<std::recursive_mutex> lock(_mutex);
+    return _peripheral ? _peripheral->connectedCount() : 0;
+  }
+
   /** @brief The number of values that the clients have read. */
   uint32_t getRequestCount() const { return _requests; }
 

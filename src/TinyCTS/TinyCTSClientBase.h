@@ -21,15 +21,73 @@ namespace tiny_cts {
  * @class TinyCTSClientBase
  * @brief The data of a TinyCTSClient. Use TinyCTSClient, which adds the
  * Bluetooth part.
+ *
+ * The client is a local clock: the time that was read from the device is
+ * extrapolated with millis(). With setUpdateInterval() the time is read
+ * again automatically - when it is not known yet and then in the interval
+ * (e.g. every hour), so the clock stays in sync without a permanent
+ * connection:
+ * @code
+ * TinyCTSClient cts;
+ * cts.setUpdateInterval(3600000);  // read the device every hour
+ * uint64_t now = cts.getTimeMs();  // reads it the first time
+ * @endcode
  */
 class TinyCTSClientBase : public TinyCTSTimeSource {
  public:
   /**
+   * @brief Read the time (and the other characteristics) from the device.
+   * Implemented by the Bluetooth stacks.
+   * @return true if the time was read.
+   */
+  virtual bool update() { return false; }
+
+  /**
+   * @brief Read the time from the device automatically: when it is not
+   * known yet and when intervalMs has passed since the last successful read.
+   * After a failed read the next attempt is made after retryMs.
+   * @param intervalMs 0 (default): only begin() / update() read the time.
+   * @param retryMs Time between the attempts while the device cannot be read.
+   */
+  void setUpdateInterval(uint32_t intervalMs, uint32_t retryMs = 60000) {
+    _intervalMs = intervalMs;
+    _retryMs = retryMs;
+  }
+
+  /**
+   * @brief getTimeMs() reads the device when an update is due (default:
+   * true). An update blocks for the scan and the connection: switch it off
+   * if getTimeMs() must not block (e.g. when the client is the time source
+   * of a TinyCTSServer) and call updateIfDue() in loop() instead.
+   */
+  void setUpdateInGetTime(bool active) { _updateInGetTime = active; }
+
+  /**
+   * @brief Read the device if an update is due (see setUpdateInterval()).
+   * @return true if the time was read.
+   */
+  bool updateIfDue() {
+    if (_intervalMs == 0 || _updating) return false;
+    const uint32_t now = TINY_CTS_MILLIS();
+    const bool due = _timeMs == 0 || static_cast<uint32_t>(now - _updateMillis) >= _intervalMs;
+    if (!due) return false;
+    if (_hasAttempt && _lastFailed && static_cast<uint32_t>(now - _attemptMillis) < _retryMs) return false;
+    _updating = true;
+    _hasAttempt = true;
+    _attemptMillis = now;
+    _lastFailed = !update();
+    _updating = false;
+    return !_lastFailed;
+  }
+
+  /**
    * @brief The UTC time in ms since 1970-01-01, extrapolated since the last
-   * update.
-   * @return 0 if the time has not been read.
+   * update. With setUpdateInterval() the device is read first if an update is
+   * due.
+   * @return 0 if the time is not known.
    */
   uint64_t getTimeMs() override {
+    if (_updateInGetTime) updateIfDue();
     if (_timeMs == 0) return 0;
     uint32_t now = TINY_CTS_MILLIS();
     _timeMs += static_cast<uint32_t>(now - _lastMillis);
@@ -65,6 +123,21 @@ class TinyCTSClientBase : public TinyCTSTimeSource {
   /** @brief The Current Time as it was sent by the device. */
   const TinyCTSCurrentTime& getCurrentTime() const { return _current; }
 
+  /**
+   * @brief The time between the read request of the Current Time and its
+   * answer in ms (the time is valid in the middle). 0 before the first read.
+   */
+  uint32_t getRoundTripMs() const { return _roundTripMs; }
+
+  /**
+   * @brief The value of millis() when the Current Time was read: getTimeMs()
+   * at that moment was the time of the device.
+   */
+  uint32_t getUpdateMillis() const { return _updateMillis; }
+
+  /** @brief Why the last update() or setTimeMs() failed ("" if it worked). */
+  const std::string& getLastError() const { return _error; }
+
   /** @brief The name of the device that was used (empty before begin()). */
   const std::string& getDeviceName() const { return _name; }
 
@@ -91,11 +164,16 @@ class TinyCTSClientBase : public TinyCTSTimeSource {
   bool storeCurrentTime(const uint8_t* data, size_t len, uint32_t startMs, uint32_t endMs) {
     TinyCTSCurrentTime t;
     uint64_t ms;
-    if (!TinyCTSCurrentTime::decode(data, len, t) || !t.toUnixMs(ms)) return false;
+    if (!TinyCTSCurrentTime::decode(data, len, t) || !t.toUnixMs(ms)) {
+      _error = "the device does not know the time";
+      return false;
+    }
     if (_timeIsLocal) ms -= static_cast<int64_t>(_info.utcOffsetMinutes()) * 60000;
     _current = t;
-    _timeMs = ms + static_cast<uint32_t>(endMs - startMs) / 2;
+    _roundTripMs = static_cast<uint32_t>(endMs - startMs);
+    _timeMs = ms + _roundTripMs / 2;
     _lastMillis = endMs;
+    _updateMillis = endMs;
     return true;
   }
 
@@ -127,6 +205,16 @@ class TinyCTSClientBase : public TinyCTSTimeSource {
   }
 
   std::string _device, _name, _address;
+  std::string _error;
+  uint32_t _intervalMs = 0;
+  uint32_t _retryMs = 60000;
+  uint32_t _attemptMillis = 0;
+  bool _hasAttempt = false;
+  bool _lastFailed = false;
+  bool _updating = false;
+  bool _updateInGetTime = true;
+  uint32_t _roundTripMs = 0;
+  uint32_t _updateMillis = 0;
   uint64_t _timeMs = 0;
   uint32_t _lastMillis = 0;
   bool _timeIsLocal = false;

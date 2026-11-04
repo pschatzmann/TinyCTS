@@ -52,7 +52,7 @@ void loop() {
   delay(1000);
 }
 ```
-Call `cts.update()` from time to time (e.g. once per hour) to stay in sync.
+Call `cts.update()` from time to time (e.g. once per hour) to stay in sync, or let the client do it: with `cts.setUpdateInterval(3600000)` it reads the device when the time is not known yet and then every hour (after a failed read it tries again after a minute). In between, the time runs on with `millis()`.
 
 To serve the time to the devices around you:
 

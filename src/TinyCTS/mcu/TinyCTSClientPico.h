@@ -57,11 +57,12 @@ class TinyCTSClient : public TinyCTSClientBase {
    * connected, read and disconnected.
    * @return true if the time was read.
    */
-  bool update() {
+  bool update() override {
     BLEClient* client = connect();
     if (client == nullptr) return false;
     bool ok = false;
     BLERemoteService* service = client->service(BLEUUID(CTS_SERVICE_UUID));
+    if (service == nullptr) _error = "the device has no Current Time Service";
     if (service != nullptr) {
       uint8_t data[16];
       size_t len;
@@ -75,6 +76,8 @@ class TinyCTSClient : public TinyCTSClientBase {
       uint32_t t0 = TINY_CTS_MILLIS();
       if (read(chr, data, len)) {
         ok = storeCurrentTime(data, len, t0, TINY_CTS_MILLIS());
+      } else {
+        _error = "the Current Time cannot be read";
       }
     }
     client->disconnect();
@@ -103,6 +106,7 @@ class TinyCTSClient : public TinyCTSClientBase {
 
  protected:
   BLEClient* connect() {
+    _error.clear();
     uint32_t seconds = (_scanMs + 999) / 1000;
     if (seconds == 0) seconds = 1;
     // the scan with the UUID keeps the devices that advertise the service
@@ -122,6 +126,7 @@ class TinyCTSClient : public TinyCTSClientBase {
       break;
     }
     BLE.clearScan();
+    if (!connected) _error = "no device found or cannot connect";
     return connected ? client : nullptr;
   }
 

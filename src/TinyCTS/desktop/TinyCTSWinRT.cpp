@@ -318,6 +318,9 @@ class WinPeripheral : public TinyCTSPeripheral {
 
   void process() override {}  // the requests are answered by a thread of the system
 
+  /** WinRT reports only the subscribed clients. */
+  int connectedCount() override { return _subscribers; }
+
   void notify(uint16_t uuid, const std::vector<uint8_t>& value) override {
     if (uuid != CTS_CURRENT_TIME_UUID || _subscribers == 0 || !_chars[0]) return;
     try {

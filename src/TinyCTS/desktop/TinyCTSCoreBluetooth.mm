@@ -485,6 +485,9 @@ class CoreBluetoothPeripheral : public TinyCTSPeripheral {
        onSubscribedCentrals:nil];
   }
 
+  /** CoreBluetooth reports only the subscribed centrals. */
+  int connectedCount() override { return _p.subscribers; }
+
   void stop() override {
     [_p.manager stopAdvertising];
     [_p.manager removeAllServices];

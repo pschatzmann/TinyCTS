@@ -43,7 +43,9 @@ namespace tiny_cts {
  * void loop() { server.process(); }
  * @endcode
  */
-class TinyCTSServer : public TinyCTSServerBase, public BLECharacteristicCallbacks {
+class TinyCTSServer : public TinyCTSServerBase,
+                      public BLECharacteristicCallbacks,
+                      public BLEServerCallbacks {
  public:
   TinyCTSServer() = default;
 
@@ -58,6 +60,14 @@ class TinyCTSServer : public TinyCTSServerBase, public BLECharacteristicCallback
     _source = &source;
     bool pairing = _settable && _encrypted;
     if (!ctsPicoBegin(deviceName, pairing)) return false;
+    if (_service != nullptr) {
+      // started before (and stopped with end()): the service exists already
+      updateCurrent(0, false);
+      updateLocal();
+      updateReference();
+      BLE.startAdvertising();
+      return true;
+    }
 
     // writing needs an encrypted connection (ATT_SECURITY_ENCRYPTED = 1)
     uint8_t writePerm = pairing ? 1 : 0;
@@ -75,6 +85,7 @@ class TinyCTSServer : public TinyCTSServerBase, public BLECharacteristicCallback
     _service->addCharacteristic(_current);
     _service->addCharacteristic(_local);
     _service->addCharacteristic(_reference);
+    BLE.server()->setCallbacks(this);  // counts the connections
     BLE.server()->addService(_service);
     BLE.startAdvertising();
     return true;
@@ -94,6 +105,12 @@ class TinyCTSServer : public TinyCTSServerBase, public BLECharacteristicCallback
     if (_current == nullptr || !notifyDue()) return false;
     return notifyTime(0);
   }
+
+  /**
+   * @brief Number of connected clients. The server callbacks of the BLE
+   * library are used for this: do not replace them with setCallbacks().
+   */
+  int getConnectedCount() override { return _connected; }
 
   /** @brief Notify the subscribed clients now. */
   bool notifyTime(uint8_t adjustReason = 0) {
@@ -133,7 +150,12 @@ class TinyCTSServer : public TinyCTSServerBase, public BLECharacteristicCallback
     updateReference();
   }
 
-  // (runs in the context of the Bluetooth stack)
+  // (run in the context of the Bluetooth stack)
+  void onConnect(BLEServer*) override { _connected++; }
+  void onDisconnect(BLEServer*) override {
+    if (_connected > 0) _connected--;
+  }
+
   void onRead(BLECharacteristic* chr) override {
     if (chr == _current) updateCurrent(0, false);
   }
@@ -173,6 +195,7 @@ class TinyCTSServer : public TinyCTSServerBase, public BLECharacteristicCallback
   Value* _current = nullptr;
   Value* _local = nullptr;
   Value* _reference = nullptr;
+  volatile int _connected = 0;
 };
 
 }  // namespace tiny_cts

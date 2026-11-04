@@ -202,6 +202,16 @@ class TinyCTSBlueZPeripheral : public TinyCTSPeripheral {
     }
   }
 
+  /** The devices that are connected to the adapter (BlueZ). */
+  int connectedCount() override {
+    if (_adapter.empty()) return 0;
+    int n = 0;
+    for (const TinyCTSBlueZ::Device& d : TinyCTSBlueZ::listDevices(_adapter)) {
+      if (d.connected) n++;
+    }
+    return n;
+  }
+
   void stop() override {
     std::string ignored;
     if (_registered) {
